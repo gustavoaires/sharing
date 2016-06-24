@@ -9,7 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import br.sharing.dao.IInstitituicaoDAO;
-import br.sharing.message.Mensagem;
+import br.sharing.messageAtribute.Mensagem;
 import br.sharing.model.Instituicao;
 
 @Transactional

@@ -9,7 +9,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import br.sharing.dao.IDisciplinaDAO;
-import br.sharing.message.Mensagem;
+import br.sharing.messageAtribute.Atributo;
+import br.sharing.messageAtribute.Mensagem;
 import br.sharing.model.Disciplina;
 
 @Transactional
@@ -28,9 +29,9 @@ public class DisciplinaController {
 	@RequestMapping("/inserir")
 	public String inserir(Model model) {
 		try {
-			model.addAttribute("mensagem", Mensagem.INSERIDO);
+			model.addAttribute(Atributo.MENSAGEM, Mensagem.INSERIDO);
 		} catch(Exception e) {
-			model.addAttribute("mensagem", Mensagem.N_INSERIDO);
+			model.addAttribute(Atributo.MENSAGEM, Mensagem.N_INSERIDO);
 		}
 		return "/mensagem";
 	}
@@ -39,10 +40,10 @@ public class DisciplinaController {
 	public String listar(Model model) {
 		try {
 			List<Disciplina> disciplinas = disciplinaDao.findAll();
-			model.addAttribute("disciplina", disciplinas);
+			model.addAttribute(Atributo.DISCIPLINAS, disciplinas);
 			return "/disciplina/listar";
 		} catch(Exception e) {
-			model.addAttribute("mensagem", Mensagem.N_LISTAR);
+			model.addAttribute(Atributo.MENSAGEM, Mensagem.N_LISTAR);
 			return "/mensagem";
 		}
 	}
@@ -51,10 +52,10 @@ public class DisciplinaController {
 	public String formAlterar(Model model, Long id) {
 		try {
 			Disciplina disciplina = disciplinaDao.findOne(id);
-			model.addAttribute("disciplina", disciplina);
+			model.addAttribute(Atributo.DISCIPLINA, disciplina);
 			return "/disciplina/form_alterar";
 		} catch(Exception e) {
-			model.addAttribute("mensagem", Mensagem.BUSCAR_ALTERAR);
+			model.addAttribute(Atributo.MENSAGEM, Mensagem.BUSCAR_ALTERAR);
 			return "/mensagem";
 		}
 		
@@ -63,9 +64,9 @@ public class DisciplinaController {
 	@RequestMapping("/alterar")
 	public String alterar(Model model) {
 		try {
-			model.addAttribute("mensagem", Mensagem.ALTERADO);
+			model.addAttribute(Atributo.MENSAGEM, Mensagem.ALTERADO);
 		} catch(Exception e) {
-			model.addAttribute("mensagem", Mensagem.N_ALTERADO);
+			model.addAttribute(Atributo.MENSAGEM, Mensagem.N_ALTERADO);
 		}
 		return "/mensagem";
 	}
@@ -74,9 +75,9 @@ public class DisciplinaController {
 	public String remover(Model model, Long id) {
 		try {
 			disciplinaDao.delete(id);
-			model.addAttribute("mensagem", Mensagem.REMOVIDO);
+			model.addAttribute(Atributo.MENSAGEM, Mensagem.REMOVIDO);
 		} catch(Exception e) {
-			model.addAttribute("mensagem", Mensagem.N_REMOVIDO);
+			model.addAttribute(Atributo.MENSAGEM, Mensagem.N_REMOVIDO);
 		}
 		return "/mensagem";
 	}

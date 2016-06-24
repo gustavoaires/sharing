@@ -9,14 +9,15 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import br.sharing.dao.IAtendimentoDAO;
-import br.sharing.message.Mensagem;
+import br.sharing.messageAtribute.Atributo;
+import br.sharing.messageAtribute.Mensagem;
 import br.sharing.model.Atendimento;
 
 @Transactional
 @Controller
 @RequestMapping("/atendimento")
 public class AtendimentoController {
-
+	
 	@Autowired
 	private IAtendimentoDAO atendimentoDao;
 	
@@ -28,9 +29,9 @@ public class AtendimentoController {
 	@RequestMapping("/inserir")
 	public String inserir(Model model) {
 		try {
-			model.addAttribute("mensagem", Mensagem.INSERIDO);
+			model.addAttribute(Atributo.MENSAGEM, Mensagem.INSERIDO);
 		} catch(Exception e) {
-			model.addAttribute("mensagem", Mensagem.N_INSERIDO);
+			model.addAttribute(Atributo.MENSAGEM, Mensagem.N_INSERIDO);
 		}
 		return "/mensagem";
 	}
@@ -39,10 +40,10 @@ public class AtendimentoController {
 	public String listar(Model model) {
 		try {
 			List<Atendimento> atendimentos = atendimentoDao.findAll();
-			model.addAttribute("atendimentos", atendimentos);
+			model.addAttribute(Atributo.ATENDIMENTOS, atendimentos);
 			return "/atendimento/listar";
 		} catch(Exception e) {
-			model.addAttribute("mensagem", Mensagem.N_LISTAR);
+			model.addAttribute(Atributo.MENSAGEM, Mensagem.N_LISTAR);
 			return "/mensagem";
 		}
 	}
@@ -51,10 +52,15 @@ public class AtendimentoController {
 	public String remover(Model model, Long id) {
 		try {
 			atendimentoDao.delete(id);
-			model.addAttribute("mensagem", Mensagem.REMOVIDO);
+			model.addAttribute(Atributo.MENSAGEM, Mensagem.REMOVIDO);
 		} catch(Exception e) {
-			model.addAttribute("mensagem", Mensagem.N_REMOVIDO);
+			model.addAttribute(Atributo.MENSAGEM, Mensagem.N_REMOVIDO);
 		}
 		return "/mensagem";
+	}
+	
+	public List<Atendimento> getPedidosAtendimentoEmAberto(String login) {
+		List<Atendimento> atendimentos = atendimentoDao.findByLoginAndStatus(login, "aberto");
+		return atendimentos; 
 	}
 }

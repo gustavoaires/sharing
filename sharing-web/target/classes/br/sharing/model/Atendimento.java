@@ -14,11 +14,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity(name="atendimento")
 public class Atendimento {
-
-	/*
-	 * Esta faltando o date para a data real do atendimento
-	 * Duvida sobre o name e o referencedColumnName no JoinColumn
-	 */
 	
 	@Id
 	@Column(name="id_atendimento")
@@ -27,8 +22,11 @@ public class Atendimento {
 	
 	private Double nota;
 	
-	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private Date dataAtendimendo; 
+	
+	@DateTimeFormat(pattern = "HH:mm")
+	private Date horaAtendimento;
 	
 	/*
 	 * Relacionando disciplina do atendimento
@@ -57,42 +55,13 @@ public class Atendimento {
 	@JoinColumn(name="id_pediu_ajuda", referencedColumnName="id_aluno")
 	private Aluno pediuAjuda;
 	
-	/*
-	 * Referenciando o dia horario e minuto do atendimento. Se dara de acordo com o aluno
-	 * 
-	@Column(name="id_dia_hora_min", insertable=false, updatable=false, nullable=false)
-	private Long idDiaHoraMin;
-	@ManyToOne(optional=false)
-	@JoinColumn(name="id_dia_hora_min", referencedColumnName="id_dia_hora_min")
-	private DiaHoraMin diaHoraMin;
-	*/
-	
+
 	public Long getIdDisciplina() {
 		return idDisciplina;
 	}
 	public void setIdDisciplina(Long idDisciplina) {
 		this.idDisciplina = idDisciplina;
 	}
-	/*
-	public Long getIdDiaHoraMin() {
-		return idDiaHoraMin;
-	}
-	public void setIdDiaHoraMin(Long idDiaHoraMin) {
-		this.idDiaHoraMin = idDiaHoraMin;
-	}
-	public DiaHoraMin getDiaHoraMin() {
-		return diaHoraMin;
-	}
-	public void setDiaHoraMin(DiaHoraMin diaHoraMin) {
-		this.diaHoraMin = diaHoraMin;
-	}
-	public DiaHoraMin getDiaHora() {
-		return diaHoraMin;
-	}
-	public void setDiaHora(DiaHoraMin diaHoraMin) {
-		this.diaHoraMin = diaHoraMin;
-	}
-	*/
 	public Long getId() {
 		return id;
 	}
@@ -134,5 +103,17 @@ public class Atendimento {
 	}
 	public void setIdPediuAjuda(Long idPediuAjuda) {
 		this.idPediuAjuda = idPediuAjuda;
+	}
+	public Date getDataAtendimendo() {
+		return dataAtendimendo;
+	}
+	public void setDataAtendimendo(Date dataAtendimendo) {
+		this.dataAtendimendo = dataAtendimendo;
+	}
+	public Date getHoraAtendimento() {
+		return horaAtendimento;
+	}
+	public void setHoraAtendimento(Date horaAtendimento) {
+		this.horaAtendimento = horaAtendimento;
 	}
 }

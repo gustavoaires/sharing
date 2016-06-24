@@ -1,4 +1,4 @@
-package br.sharing;
+package br.sharing.encrypt;
 
 import java.math.BigInteger;
 import java.security.MessageDigest;

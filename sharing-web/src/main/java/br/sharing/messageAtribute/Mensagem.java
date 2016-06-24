@@ -1,4 +1,4 @@
-package br.sharing.message;
+package br.sharing.messageAtribute;
 
 public class Mensagem {
 
