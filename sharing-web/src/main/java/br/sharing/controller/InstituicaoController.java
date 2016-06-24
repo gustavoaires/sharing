@@ -2,10 +2,9 @@ package br.sharing.controller;
 
 import java.util.List;
 
-import javax.transaction.Transactional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -14,8 +13,9 @@ import br.sharing.message.Mensagem;
 import br.sharing.model.Instituicao;
 
 @Transactional
-@Controller("/instituicao")
-public class InstitituicaoController {
+@Controller
+@RequestMapping("/instituicao")
+public class InstituicaoController {
 
 	@Autowired
 	private IInstitituicaoDAO instituicaoDao;
@@ -79,5 +79,13 @@ public class InstitituicaoController {
 			model.addAttribute("mensagem", Mensagem.N_REMOVIDO);
 		}
 		return "/mensagem";
+	}
+	
+	public List<Instituicao> getTodasInstituicoes() {
+		return instituicaoDao.findAll();
+	}
+	
+	public Instituicao getInstituicaoPorId(Long id) {
+		return instituicaoDao.findOne(id);
 	}
 }

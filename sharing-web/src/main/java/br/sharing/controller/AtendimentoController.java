@@ -2,10 +2,9 @@ package br.sharing.controller;
 
 import java.util.List;
 
-import javax.transaction.Transactional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -14,7 +13,8 @@ import br.sharing.message.Mensagem;
 import br.sharing.model.Atendimento;
 
 @Transactional
-@Controller("/atendimento")
+@Controller
+@RequestMapping("/atendimento")
 public class AtendimentoController {
 
 	@Autowired

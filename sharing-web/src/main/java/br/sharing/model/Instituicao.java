@@ -22,8 +22,14 @@ public class Instituicao {
 	/*
 	 * Relacionando a instituicao com seus cursos
 	 */
-	@OneToMany(mappedBy="instituicao", targetEntity=Curso.class, fetch=FetchType.EAGER)
-	private List<Curso> cursos;
+	@OneToMany(mappedBy="instituicao", targetEntity=Disciplina.class, fetch=FetchType.EAGER)
+	private List<Disciplina> disciplinas;
+	
+	/*
+	 * Relacionando os alunos
+	 */
+	@OneToMany(mappedBy="instituicao", targetEntity=Aluno.class, fetch=FetchType.EAGER)
+	private List<Aluno> alunos;
 	
 	public Long getId() {
 		return id;
@@ -31,13 +37,6 @@ public class Instituicao {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public List<Curso> getCursos() {
-		return cursos;
-	}
-	public void setCursos(List<Curso> cursos) {
-		this.cursos = cursos;
-	}
-
 	public String getNome() {
 		return nome;
 	}

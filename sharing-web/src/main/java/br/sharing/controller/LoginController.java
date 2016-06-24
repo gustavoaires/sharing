@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import br.sharing.Criptografia;
 import br.sharing.dao.IAlunoDAO;
 import br.sharing.model.Aluno;
 
@@ -17,24 +18,23 @@ public class LoginController {
 	@Autowired
 	private IAlunoDAO alunoDao;
 	
-	@RequestMapping("/formLogin")
+	@RequestMapping("/form")
 	public String formLogin(){
 		return "/login/form_login";
 	}
 	
-	@RequestMapping("/login")
+	@RequestMapping("/loginAssert")
 	public String login(Aluno aluno, HttpSession session) {
 		
 		Aluno candidato = alunoDao.findByLoginLike(aluno.getLogin());
 		if(!(candidato == null)){
-			if(candidato.getSenha().equals(aluno.getSenha())){
+			if(Criptografia.criptografar(candidato.getSenha()).equals(aluno.getSenha())){
 				session.setAttribute("aluno_logado", candidato);
-				//pagina inicial do sistema depois do usuario logar
-				return "/aluno/timeline";
+				return "redirect:/aluno/home";
 			}
 		}
 		
-		return "redirect:formLogin";
+		return "redirect:/form";
 	}
 	
 	@RequestMapping("/logout")

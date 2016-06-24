@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 @Entity(name="disciplina")
@@ -21,15 +22,12 @@ public class Disciplina {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
 	private String nome;
-
-	/*
-	 * Relacionando a disciplina com seus cursos
-	 */
-	@ManyToMany(fetch=FetchType.EAGER)
-	@JoinTable(name="curso_disciplina", 
-		joinColumns=@JoinColumn(name="id_disciplina", referencedColumnName="id_disciplina"),
-		inverseJoinColumns=@JoinColumn(name="id_curso", referencedColumnName="id_curso"))
-	private List<Curso> cursos;
+	
+	@Column(name="id_instituicao", insertable=false, nullable=false, updatable=false)
+	private Long idInstituicao;
+	@ManyToOne(optional=false)
+	@JoinColumn(name="id_instituicao", referencedColumnName="id_instituicao")
+	private Instituicao instituicao;
 	
 	/*
 	 * Relacionando os atendimentos desta disciplina
@@ -58,12 +56,6 @@ public class Disciplina {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	public List<Curso> getCurso() {
-		return cursos;
-	}
-	public void setCursos(List<Curso> curso) {
-		this.cursos = curso;
-	}
 	public List<Atendimento> getAtendimentos() {
 		return atendimentos;
 	}
@@ -75,8 +67,5 @@ public class Disciplina {
 	}
 	public void setAlunos(List<Aluno> alunos) {
 		this.alunos = alunos;
-	}
-	public List<Curso> getCursos() {
-		return cursos;
 	}
 }
