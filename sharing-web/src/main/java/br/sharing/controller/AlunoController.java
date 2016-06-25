@@ -105,8 +105,8 @@ public class AlunoController {
 		return "/aluno/minhas_disciplinas";
 	}
 	
-	@RequestMapping("/selecionaDisciplina")
-	public void selecionaDisciplina(Long id, HttpSession sessao, HttpServletResponse resposta) {
+	@RequestMapping("/selecionaMinhaDisciplina")
+	public void selecionaMinhaDisciplina(Long id, HttpSession sessao, HttpServletResponse resposta) {
 		Disciplina disc = disciplinaController.getDisciplinaPorId(id);
 		Aluno a = ((Aluno)sessao.getAttribute(Atributo.ALUNO_LOGADO));
 		if (!a.getDisciplinas().contains(disc))
