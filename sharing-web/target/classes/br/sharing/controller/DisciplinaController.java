@@ -83,7 +83,7 @@ public class DisciplinaController {
 	}
 	
 	public List<Disciplina> getDisciplinasPorInstituicao(Long id) {
-		return disciplinaDao.findAll();
+		return disciplinaDao.findByIdInstituicao(id)
 	}
 
 	public Disciplina getDisciplinaPorId(Long id) {
