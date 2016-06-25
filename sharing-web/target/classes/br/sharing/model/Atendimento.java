@@ -19,8 +19,8 @@ public class Atendimento {
 	@Column(name="id_atendimento")
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
-	
 	private Double nota;
+	private String status;
 	
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private Date dataAtendimendo; 
@@ -55,7 +55,6 @@ public class Atendimento {
 	@JoinColumn(name="id_pediu_ajuda", referencedColumnName="id_aluno")
 	private Aluno pediuAjuda;
 	
-
 	public Long getIdDisciplina() {
 		return idDisciplina;
 	}
@@ -115,5 +114,11 @@ public class Atendimento {
 	}
 	public void setHoraAtendimento(Date horaAtendimento) {
 		this.horaAtendimento = horaAtendimento;
+	}
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
 	}
 }

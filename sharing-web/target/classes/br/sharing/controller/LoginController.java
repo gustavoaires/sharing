@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import br.sharing.encrypt.Criptografia;
+import br.sharing.messageAtribute.Atributo;
 import br.sharing.dao.IAlunoDAO;
 import br.sharing.model.Aluno;
 
@@ -30,7 +31,7 @@ public class LoginController {
 		
 		if (!(candidato == null)) {
 			if (Criptografia.criptografar(candidato.getSenha()).equals(aluno.getSenha())) {
-				sessao.setAttribute("aluno_logado", candidato);
+				sessao.setAttribute(Atributo.ALUNO_LOGADO, candidato);
 				return "redirect:/aluno/home";
 			}
 		}

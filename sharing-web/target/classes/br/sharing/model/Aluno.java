@@ -9,7 +9,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -22,7 +21,9 @@ public class Aluno {
 	private String login;
 	private String senha;
 	private String primeiroNome;
-	private String segundoNome;
+	private String sobrenome;
+	private String descricao;
+	private String horariosDisponiveis;
 	
 	@ManyToMany(mappedBy="alunos", fetch=FetchType.LAZY)
 	private List<Disciplina> disciplinas;
@@ -40,16 +41,6 @@ public class Aluno {
 	@Column(name="atendimento_recebido")
 	@OneToMany(mappedBy="pediuAjuda", targetEntity=Atendimento.class, fetch=FetchType.EAGER)
 	private List<Atendimento> atendimentosRecebidos;
-	
-	
-	/*
-	 * Relacionando horarios disponiveis
-	 */
-	@ManyToMany(fetch=FetchType.EAGER)
-	@JoinTable(name="aluno_disponivel",
-		joinColumns=@JoinColumn(name="id_aluno", referencedColumnName="id_aluno"),
-		inverseJoinColumns=@JoinColumn(name="id_dia_hora_min", referencedColumnName="id_dia_hora_min"))
-	private List<DiaHoraMin> horariosDisponiveis;
 	
 	/*
 	 * Relacionando a instituicao
@@ -72,10 +63,10 @@ public class Aluno {
 	public void setInstituicao(Instituicao instituicao) {
 		this.instituicao = instituicao;
 	}
-	public List<DiaHoraMin> getHorariosDisponiveis() {
+	public String getHorariosDisponiveis() {
 		return horariosDisponiveis;
 	}
-	public void setHorariosDisponiveis(List<DiaHoraMin> horariosDisponiveis) {
+	public void setHorariosDisponiveis(String horariosDisponiveis) {
 		this.horariosDisponiveis = horariosDisponiveis;
 	}
 	public List<Disciplina> getDisciplinas() {
@@ -108,16 +99,28 @@ public class Aluno {
 	public void setPrimeiroNome(String primeiroNome) {
 		this.primeiroNome = primeiroNome;
 	}
-	public String getSegundoNome() {
-		return segundoNome;
+	public String getSobrenome() {
+		return sobrenome;
 	}
-	public void setSegundoNome(String segundoNome) {
-		this.segundoNome = segundoNome;
+	public void setSobrenome(String sobrenome) {
+		this.sobrenome = sobrenome;
 	}
 	public String getSenha() {
 		return senha;
 	}
 	public void setSenha(String senha) {
 		this.senha = senha;
+	}
+	public String getDescricao() {
+		return descricao;
+	}
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+	public void addDisciplina(Disciplina disciplina) {
+		disciplinas.add(disciplina);
+	}
+	public void removeDisciplina(Disciplina disc) {
+		disciplinas.remove(disc);
 	}
 }

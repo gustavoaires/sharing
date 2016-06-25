@@ -81,4 +81,12 @@ public class DisciplinaController {
 		}
 		return "/mensagem";
 	}
+	
+	public List<Disciplina> getDisciplinasPorInstituicao(Long id) {
+		return disciplinaDao.findAll();
+	}
+
+	public Disciplina getDisciplinaPorId(Long id) {
+		return disciplinaDao.findOne(id);
+	}
 }
