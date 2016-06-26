@@ -1,4 +1,4 @@
-package br.sharing.messageAtribute;
+package br.sharing.message_atribute;
 
 public class Atributo {
 

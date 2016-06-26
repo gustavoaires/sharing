@@ -9,8 +9,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import br.sharing.dao.IAtendimentoDAO;
-import br.sharing.messageAtribute.Atributo;
-import br.sharing.messageAtribute.Mensagem;
+import br.sharing.message_atribute.Atributo;
+import br.sharing.message_atribute.Mensagem;
 import br.sharing.model.Atendimento;
 
 @Transactional

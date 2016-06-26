@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import br.sharing.encrypt.Criptografia;
-import br.sharing.messageAtribute.Atributo;
+import br.sharing.message_atribute.Atributo;
 import br.sharing.dao.IAlunoDAO;
 import br.sharing.model.Aluno;
 

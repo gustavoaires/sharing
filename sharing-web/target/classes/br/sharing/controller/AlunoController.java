@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import br.sharing.dao.IAlunoDAO;
 import br.sharing.encrypt.Criptografia;
-import br.sharing.messageAtribute.Atributo;
-import br.sharing.messageAtribute.Mensagem;
+import br.sharing.message_atribute.Atributo;
+import br.sharing.message_atribute.Mensagem;
 import br.sharing.model.Aluno;
 import br.sharing.model.Atendimento;
 import br.sharing.model.Disciplina;
@@ -105,8 +105,8 @@ public class AlunoController {
 		return "/aluno/minhas_disciplinas";
 	}
 	
-	@RequestMapping("/selecionaMinhaDisciplina")
-	public void selecionaMinhaDisciplina(Long id, HttpSession sessao, HttpServletResponse resposta) {
+	@RequestMapping("/selecionarMinhaDisciplina")
+	public void selecionarMinhaDisciplina(Long id, HttpSession sessao, HttpServletResponse resposta) {
 		Disciplina disc = disciplinaController.getDisciplinaPorId(id);
 		Aluno a = ((Aluno)sessao.getAttribute(Atributo.ALUNO_LOGADO));
 		if (!a.getDisciplinas().contains(disc))

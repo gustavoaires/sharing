@@ -31,14 +31,12 @@ public class Aluno {
 	/*
 	 * Relacionando atendimentos dados
 	 */
-	@Column(name="atendimento_dado")
 	@OneToMany(mappedBy="ajudante", targetEntity=Atendimento.class, fetch=FetchType.EAGER)
 	private List<Atendimento> atendimentosDados;
 	
 	/*
 	 * Relacionando atendimentos recebidos
 	 */
-	@Column(name="atendimento_recebido")
 	@OneToMany(mappedBy="pediuAjuda", targetEntity=Atendimento.class, fetch=FetchType.EAGER)
 	private List<Atendimento> atendimentosRecebidos;
 	

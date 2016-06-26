@@ -9,8 +9,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import br.sharing.dao.IDisciplinaDAO;
-import br.sharing.messageAtribute.Atributo;
-import br.sharing.messageAtribute.Mensagem;
+import br.sharing.message_atribute.Atributo;
+import br.sharing.message_atribute.Mensagem;
 import br.sharing.model.Disciplina;
 
 @Transactional
@@ -46,6 +46,12 @@ public class DisciplinaController {
 			model.addAttribute(Atributo.MENSAGEM, Mensagem.N_LISTAR);
 			return "/mensagem";
 		}
+	}
+	
+	@RequestMapping("/verDisciplina")
+	public String verDisciplina(Long id, Model model) {
+		
+		return "/disciplina/ver_disciplina";
 	}
 	
 	@RequestMapping("/formAlterar")
