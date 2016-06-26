@@ -25,18 +25,20 @@ import br.sharing.model.Instituicao;
 @Controller
 @RequestMapping("/aluno")
 public class AlunoController {
-
-	@Autowired
+	
 	private IAlunoDAO alunoDao;
-	
-	@Autowired
 	private InstituicaoController instituicaoController;
-	
-	@Autowired
 	private AtendimentoController atendimentoController;
+	private DisciplinaController disciplinaController;
 	
 	@Autowired
-	private DisciplinaController disciplinaController;
+	public AlunoController(IAlunoDAO alunoDao, InstituicaoController instituicaoController,
+			AtendimentoController atendimentoController, DisciplinaController disciplinaController) {
+		this.alunoDao = alunoDao;
+		this.atendimentoController = atendimentoController;
+		this.disciplinaController = disciplinaController;
+		this.instituicaoController = instituicaoController;
+	}
 		
 	@RequestMapping("/home")
 	public String home(Model model, HttpSession sessao) {

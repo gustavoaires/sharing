@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import br.sharing.dao.IInstitituicaoDAO;
+import br.sharing.dao.IInstituicaoDAO;
 import br.sharing.message_atribute.Mensagem;
 import br.sharing.model.Instituicao;
 
@@ -17,8 +17,12 @@ import br.sharing.model.Instituicao;
 @RequestMapping("/instituicao")
 public class InstituicaoController {
 
+	private IInstituicaoDAO instituicaoDao;
+	
 	@Autowired
-	private IInstitituicaoDAO instituicaoDao;
+	public InstituicaoController(IInstituicaoDAO instituicaoDao) {
+		this.instituicaoDao = instituicaoDao;
+	}
 	
 	@RequestMapping("/formInserir")
 	public String formInserir() {

@@ -11,15 +11,23 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import br.sharing.dao.IDisciplinaDAO;
 import br.sharing.message_atribute.Atributo;
 import br.sharing.message_atribute.Mensagem;
+import br.sharing.model.Aluno;
 import br.sharing.model.Disciplina;
+import br.sharing.service.VerDisciplinaService;
 
 @Transactional
 @Controller
 @RequestMapping("/disciplina")
 public class DisciplinaController {
 
-	@Autowired
 	private IDisciplinaDAO disciplinaDao;
+	private VerDisciplinaService verDisciplina;
+	
+	@Autowired
+	public DisciplinaController(IDisciplinaDAO disciplinaDao, VerDisciplinaService verDisciplina) {
+		this.disciplinaDao = disciplinaDao;
+		this.verDisciplina = verDisciplina;
+	}
 	
 	@RequestMapping("/formInserir")
 	public String formInserir() {
@@ -50,7 +58,16 @@ public class DisciplinaController {
 	
 	@RequestMapping("/verDisciplina")
 	public String verDisciplina(Long id, Model model) {
-		
+		List<Aluno> alunos = verDisciplina.getAlunosDisciplina(id);
+		if (alunos != null) {
+			model.addAttribute(Atributo.ALUNOS, alunos);
+			for (Aluno a : alunos) {
+				model.addAttribute("media_"+a.getLogin(), verDisciplina.getMediaAluno(id, a.getLogin()));
+			}
+			
+		} else {
+			model.addAttribute(Atributo.N_ALUNOS, Mensagem.N_ALUNOS);
+		}
 		return "/disciplina/ver_disciplina";
 	}
 	

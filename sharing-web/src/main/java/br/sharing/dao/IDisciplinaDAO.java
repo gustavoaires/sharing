@@ -10,6 +10,6 @@ import br.sharing.model.Disciplina;
 
 public interface IDisciplinaDAO extends JpaRepository<Disciplina, Long> {
 
-	@Query("select d from disciplina d where d.id_instituicao = :id")
+	@Query("select d from disciplina d where d.idInstituicao = :id")
 	public List<Disciplina> findByIdInstituicao(@Param("id") Long id);
 }

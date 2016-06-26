@@ -10,10 +10,10 @@ import br.sharing.model.Atendimento;
 
 public interface IAtendimentoDAO extends JpaRepository<Atendimento, Long> {
 
-	@Query("select a from atendimento a where a.id_ajudante = :login and a.status = :status")
+	@Query("select a from atendimento a where a.idAjudante = :login and a.status = :status")
 	public List<Atendimento> findByLoginAndStatus(@Param("login") String login, @Param("status") String status);
 
 	@Query("select avg(a.nota) from atendimento a "
-			+ "where a.id_disciplina = :id_disc and a.id_ajudante = :login")
+			+ "where a.idDisciplina = :id_disc and a.idAjudante = :login")
 	public Double findMediaByIdAluno(@Param("id_disc") Long idDisciplina, @Param("login") String login);
 }

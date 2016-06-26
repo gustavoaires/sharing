@@ -17,9 +17,13 @@ import br.sharing.model.Atendimento;
 @Controller
 @RequestMapping("/atendimento")
 public class AtendimentoController {
-	
-	@Autowired
+
 	private IAtendimentoDAO atendimentoDao;
+
+	@Autowired
+	public AtendimentoController(IAtendimentoDAO atendimentoDao) {
+		this.atendimentoDao = atendimentoDao;
+	}
 	
 	@RequestMapping("/formInserir")
 	public String formInserir() {
