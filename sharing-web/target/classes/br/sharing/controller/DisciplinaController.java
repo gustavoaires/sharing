@@ -61,13 +61,10 @@ public class DisciplinaController {
 		List<Aluno> alunos = verDisciplina.getAlunosDisciplina(id);
 		if (alunos != null) {
 			model.addAttribute(Atributo.ALUNOS, alunos);
-			for (Aluno a : alunos) {
+			for (Aluno a : alunos)
 				model.addAttribute("media_"+a.getLogin(), verDisciplina.getMediaAluno(id, a.getLogin()));
-			}
-			
-		} else {
+		} else
 			model.addAttribute(Atributo.N_ALUNOS, Mensagem.N_ALUNOS);
-		}
 		return "/disciplina/ver_disciplina";
 	}
 	
