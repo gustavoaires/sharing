@@ -17,5 +17,10 @@ public class Mensagem {
 	public static final String N_ALTERAR_SENHA = "Não foi possível alterar a senha. Informe a senha atual correta";
 	public static final String SENHA_ALTERADA  = "Senha alterada com sucesso!";
 	public static final String N_ALTERAR_PERFIL = "Não foi possível alterar seu perfil. Tente novamente.";
+	public static final String ERRO = "Algo errado aconteceu.";
+	public static final String ATENDIMENTO_CONFIRMADO = "Atendimento confirmado com sucesso!";
+	public static final String ATENDIMENTO_NEGADO = "Atendimento negado com sucesso!";
+	public static final String ATENDIMENTO_FECHADO = "Pedido de atendimento negado com sucesso";
+	public static final String ATENDIMENTO_AVALIADO = "Atendimento avaliado com sucesso!";
 	
 }

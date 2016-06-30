@@ -15,4 +15,12 @@ public class Atributo {
 	public static final String N_ALTERAR_SENHA = "senha_nao_alterada";
 	public static final String SENHA_ALTERADA = "senha_alterada";
 	public static final String N_ALTERAR_PERFIL = "perfil_nao_alterado";
+	public static final String ERRO = "erro";
+	public static final String ATENDIMENTO_CONFIRMADO = "atendimento_confirmado";
+	public static final String ATENDIMENTO_NEGADO = "atendimento_negado";
+	public static final String ATENDIMENTO_FECHADO = "atendimento_fechado";
+	public static final String ATENDIMENTO_AVALIADO = "atendimento_avaliado";
+	public static final String ATENDIMENTOS_CONFIRMADOS = "atendimentos_conformados";
+	public static final String MEUS_PEDIDOS_ATENDIMENTOS = "meus_pedidos_atendimentos";
+	public static final String ATENDIMENTOS_NEGADOS = "atendimentos_negados";
 }

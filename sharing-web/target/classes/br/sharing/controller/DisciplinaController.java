@@ -109,4 +109,8 @@ public class DisciplinaController {
 	public Disciplina getDisciplinaPorId(Long id) {
 		return disciplinaDao.findOne(id);
 	}
+	
+	public List<Disciplina> getDisciplinaPorAluno(String login) {
+		return disciplinaDao.findByLogin(login);
+	}
 }

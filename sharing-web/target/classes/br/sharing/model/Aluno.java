@@ -25,7 +25,7 @@ public class Aluno {
 	private String descricao;
 	private String horariosDisponiveis;
 	
-	@ManyToMany(mappedBy="alunos", fetch=FetchType.LAZY)
+	@ManyToMany(mappedBy="alunos", fetch=FetchType.EAGER)
 	private List<Disciplina> disciplinas;
 	
 	/*

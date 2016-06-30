@@ -19,8 +19,9 @@ public class Atendimento {
 	@Column(name="id_atendimento")
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
-	private Double nota;
+	private Integer nota;
 	private String status;
+	private String localDeEncontro;
 	
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private Date dataAtendimendo; 
@@ -85,10 +86,10 @@ public class Atendimento {
 	public void setPediuAjuda(Aluno pediuAjuda) {
 		this.pediuAjuda = pediuAjuda;
 	}
-	public Double getNota() {
+	public Integer getNota() {
 		return nota;
 	}
-	public void setNota(Double nota) {
+	public void setNota(Integer nota) {
 		this.nota = nota;
 	}
 	public Long getIdAjudante() {
@@ -120,5 +121,11 @@ public class Atendimento {
 	}
 	public void setStatus(String status) {
 		this.status = status;
+	}
+	public String getLocalDeEncontro() {
+		return localDeEncontro;
+	}
+	public void setLocalDeEncontro(String localDeEncontro) {
+		this.localDeEncontro = localDeEncontro;
 	}
 }

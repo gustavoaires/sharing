@@ -14,6 +14,6 @@ public interface IAtendimentoDAO extends JpaRepository<Atendimento, Long> {
 	public List<Atendimento> findByLoginAndStatus(@Param("login") String login, @Param("status") String status);
 
 	@Query("select avg(a.nota) from atendimento a "
-			+ "where a.idDisciplina = :id_disc and a.idAjudante = :login")
+			+ "where a.idDisciplina = :id_disc and a.idAjudante = :login and a.status = 'avaliado'")
 	public Double findMediaByIdAluno(@Param("id_disc") Long idDisciplina, @Param("login") String login);
 }

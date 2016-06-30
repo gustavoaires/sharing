@@ -43,7 +43,7 @@ public class AlunoController {
 	@RequestMapping("/home")
 	public String home(Model model, HttpSession sessao) {
 		String login = ((Aluno)sessao.getAttribute(Atributo.ALUNO_LOGADO)).getLogin();
-		List<Atendimento> atendimentos = atendimentoController.getPedidosAtendimentoEmAberto(login);
+		List<Atendimento> atendimentos = atendimentoController.getPedidosAtendimentoPorStatus(login, "aberto");
 		model.addAttribute(Atributo.PEDIDOS_ATENDIMENTO, atendimentos);
 		return "/aluno/home";
 	}
@@ -107,6 +107,12 @@ public class AlunoController {
 		return "/aluno/minhas_disciplinas";
 	}
 	
+	/**
+	 * Request para a função ajax de atualização de disciplina
+	 * @param id
+	 * @param sessao
+	 * @param resposta
+	 */
 	@RequestMapping("/selecionarMinhaDisciplina")
 	public void selecionarMinhaDisciplina(Long id, HttpSession sessao, HttpServletResponse resposta) {
 		Disciplina disc = disciplinaController.getDisciplinaPorId(id);
@@ -140,6 +146,25 @@ public class AlunoController {
 		} else {
 			model.addAttribute(Atributo.MENSAGEM, Mensagem.USUARIO_SENHA);
 			return "/aluno/form_cadastrar";
+		}
+	}
+	
+	@RequestMapping("/perfil")
+	public String perfil(String login, Model model) {
+		try {
+			List<Atendimento> confirmados = 
+					atendimentoController.getPedidosAtendimentoPorStatus(login, "confirmados");
+			model.addAttribute(Atributo.ATENDIMENTOS_CONFIRMADOS, confirmados);
+			List<Atendimento> negados =
+					atendimentoController.getPedidosAtendimentoPorStatus(login, "negados");
+			model.addAttribute(Atributo.ATENDIMENTOS_NEGADOS, negados);
+			List<Disciplina> disciplinas =
+					disciplinaController.getDisciplinaPorAluno(login);
+			model.addAttribute(Atributo.DISCIPLINAS, disciplinas);
+			return "aluno/perfil";
+		} catch(Exception e) {
+			model.addAttribute(Atributo.ERRO, Mensagem.ERRO);
+			return "/mensagem";
 		}
 	}
 }
