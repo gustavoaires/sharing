@@ -42,7 +42,7 @@ public class Atendimento {
 	 * Relacionando aluno que ajudou
 	 */
 	@Column(name="id_ajudante", insertable=false, updatable=false, nullable=false)
-	private Long idAjudante;
+	private String idAjudante;
 	@ManyToOne(optional=false)
 	@JoinColumn(name="id_ajudante", referencedColumnName="id_aluno")
 	private Aluno ajudante;
@@ -51,7 +51,7 @@ public class Atendimento {
 	 * Relacionando aluno que pediu ajuda
 	 */
 	@Column(name="id_pediu_ajuda", insertable=false, updatable=false, nullable=false)
-	private Long idPediuAjuda;
+	private String idPediuAjuda;
 	@ManyToOne(optional=false)
 	@JoinColumn(name="id_pediu_ajuda", referencedColumnName="id_aluno")
 	private Aluno pediuAjuda;
@@ -92,16 +92,16 @@ public class Atendimento {
 	public void setNota(Integer nota) {
 		this.nota = nota;
 	}
-	public Long getIdAjudante() {
+	public String getIdAjudante() {
 		return idAjudante;
 	}
-	public void setIdAjudante(Long idAjudante) {
+	public void setIdAjudante(String idAjudante) {
 		this.idAjudante = idAjudante;
 	}
-	public Long getIdPediuAjuda() {
+	public String getIdPediuAjuda() {
 		return idPediuAjuda;
 	}
-	public void setIdPediuAjuda(Long idPediuAjuda) {
+	public void setIdPediuAjuda(String idPediuAjuda) {
 		this.idPediuAjuda = idPediuAjuda;
 	}
 	public Date getDataAtendimendo() {

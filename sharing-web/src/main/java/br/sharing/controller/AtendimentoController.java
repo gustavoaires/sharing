@@ -36,7 +36,7 @@ public class AtendimentoController {
 	}
 	
 	@RequestMapping("/enviarSolicitacao")
-	public String enviarSolicitacao(Long idAjudante, 
+	public String enviarSolicitacao(String idAjudante, 
 			@DateTimeFormat(pattern="dd/MM/yyyy") Date dia, 
 			@DateTimeFormat(pattern="HH:mm") Date hora, 
 			String local, Model model, HttpSession sessao) {
