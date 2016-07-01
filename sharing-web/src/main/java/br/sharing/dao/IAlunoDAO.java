@@ -9,13 +9,12 @@ import br.sharing.model.Aluno;
 
 public interface IAlunoDAO extends JpaRepository<Aluno, String> {
 
-	public Aluno findByLoginLike(String login);
+	public Aluno findByLogin(String login);
 	
 	/*
-	 * corrigir
+	 * precisa testar
 	 */
-	@Query(value="SELECT * from aluno AS a, aluno_disciplina AS a_d "
-			+ "WHERE a_d.id_disciplina = ?0 and a_d.id_aluno = a.id_aluno",
-			nativeQuery=true)
+	@Query(value="SELECT * FROM aluno AS a LEFT JOIN aluno_disciplina AS a_d "
+			+ "ON a_d.id_disciplina = ?0 AND a_d.id_aluno = a.id_aluno", nativeQuery=true)
 	public List<Aluno> findByIdDisciplina(Long id);
 }

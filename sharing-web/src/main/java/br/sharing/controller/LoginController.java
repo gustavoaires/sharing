@@ -27,7 +27,7 @@ public class LoginController {
 	@RequestMapping("/loginAssert")
 	public String login(Aluno aluno, HttpSession sessao) {
 		
-		Aluno candidato = alunoDao.findByLoginLike(aluno.getLogin());
+		Aluno candidato = alunoDao.findByLogin(aluno.getLogin());
 		
 		if (!(candidato == null)) {
 			if (Criptografia.criptografar(candidato.getSenha()).equals(aluno.getSenha())) {

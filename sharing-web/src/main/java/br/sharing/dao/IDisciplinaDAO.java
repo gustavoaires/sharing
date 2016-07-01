@@ -14,9 +14,9 @@ public interface IDisciplinaDAO extends JpaRepository<Disciplina, Long> {
 	public List<Disciplina> findByIdInstituicao(@Param("id") Long id);
 	
 	/*
-	 * corrigir
+	 * precisa testar
 	 */
-	@Query(value = "SELECT * FROM disciplina AS d, aluno_disciplina AS a_d "
-			+ "WHERE a_d.id_disciplina = d.disciplina and a_d.id_aluno = ?0", nativeQuery=true)
+	@Query(value = "SELECT * FROM disciplina AS d LEFT JOIN aluno_disciplina AS a_d "
+			+ "ON a_d.id_disciplina = d.disciplina AND WHERE a_d.id_aluno = ?0", nativeQuery=true)
 	public List<Disciplina> findByLogin(String login);
 }

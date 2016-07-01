@@ -135,7 +135,7 @@ public class AlunoController {
 	@RequestMapping("/cadastrar")
 	public String cadastrar(Aluno candidato, @RequestParam("instituicao") Long idInstituicao,
 			Model model, HttpSession sessao) {
-		Aluno aluno = alunoDao.findByLoginLike(candidato.getLogin());
+		Aluno aluno = alunoDao.findByLogin(candidato.getLogin());
 		
 		if (aluno == null) {
 			candidato.setSenha(Criptografia.criptografar(candidato.getSenha()));
