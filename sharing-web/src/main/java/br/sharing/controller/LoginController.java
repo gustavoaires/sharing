@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import br.sharing.encrypt.Criptografia;
 import br.sharing.message_atribute.Atributo;
@@ -25,12 +26,14 @@ public class LoginController {
 	}
 	
 	@RequestMapping("/loginAssert")
-	public String login(Aluno aluno, HttpSession sessao) {
+	public String login(@RequestParam("login") String login,
+			@RequestParam("senha") String senha,
+			HttpSession sessao) {
 		
-		Aluno candidato = alunoDao.findByLogin(aluno.getLogin());
+		Aluno candidato = alunoDao.findByLogin(login);
 		
-		if (!(candidato == null)) {
-			if (Criptografia.criptografar(candidato.getSenha()).equals(aluno.getSenha())) {
+		if (candidato != null) {
+			if (Criptografia.criptografar(senha).equals(candidato.getSenha())) {
 				sessao.setAttribute(Atributo.ALUNO_LOGADO, candidato);
 				return "redirect:/aluno/home";
 			}
