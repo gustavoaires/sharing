@@ -7,7 +7,7 @@
 
 		<p>
 			You are now connected to your Facebook account.
-			Click <a href="/">here</a> to see some entries from your Facebook feed.
+			Click <a href="/facebook">here</a> to see some entries from your Facebook feed.
 		</p>
 	</body>
 </html>
