@@ -30,7 +30,7 @@ public class FacebookController {
         if (connectionRepository.findPrimaryConnection(Facebook.class) == null) {
             return "redirect:/connect/facebook";
         }
-        facebook.feedOperations().updateStatus("I'm trying out Spring Social!");
+        //facebook.feedOperations().updateStatus("I'm trying out Spring Social!");
         model.addAttribute("facebookProfile", facebook.userOperations().getUserProfile());
         PagedList<Post> feed = facebook.feedOperations().getFeed();
         model.addAttribute("feed", feed);
