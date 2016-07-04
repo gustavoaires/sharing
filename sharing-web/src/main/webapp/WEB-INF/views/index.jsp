@@ -29,10 +29,10 @@
 				<div class="collapse navbar-collapse" id="navbar-ex-collapse">
 					<ul class="nav navbar-nav navbar-right">
 						<li class="active" id="link-home"><a href="#"
-							style="color: #fff"><i class="fa fa-fw fa-home"></i>Início<br/></a>
+							style="color: #fff"><i class="fa fa-fw fa-home"></i>Ini�cio<br/></a>
 						</li>
-						<li><a href="#what-we-do" class="scroll"><i
-								class="fa fa-fw fa-info-circle fa-lg text-inverse"></i></a></li>
+						<li><a href="#what-we-do" style="color: #fff" class="scroll"><i
+								class="fa fa-fw fa-info-circle fa-lg text-inverse"></i>O que fazemos</a></li>
 					</ul>
 				</div>
 			</div>
@@ -58,19 +58,19 @@
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal"
-						aria-hidden="true">×</button>
-					<h4 class="modal-title">Informe seu username e senha</h4>
+						aria-hidden="true">x</button>
+					<h4 class="modal-title">Informe seu nome de usuario e senha</h4>
 				</div>
-				<form class="form-horizontal" role="form">
+				<form class="form-horizontal" role="form" action="/login/loginAssert" method="post">
 					<div class="modal-body">
 						<div class="form-group">
 							<div class="col-sm-2">
 								<label for="matricula" class="control-label"
-									contenteditable="true">Username</label>
+									contenteditable="true">Usuario</label>
 							</div>
 							<div class="col-sm-10">
-								<input type="text" class="form-control" id="matricula"
-									placeholder="Matrícula"/>
+								<input type="text" class="form-control" name="login"
+									placeholder="usuario"/>
 							</div>
 						</div>
 						<div class="form-group">
@@ -78,13 +78,13 @@
 								<label for="senha" class="control-label">Senha</label>
 							</div>
 							<div class="col-sm-10">
-								<input type="password" class="form-control" id="senha"
-									placeholder="Senha"/>
+								<input type="password" class="form-control" id="senha" name="senha"
+									placeholder="senha"/>
 							</div>
 						</div>
 					</div>
 					<div class="modal-footer">
-						<a class="btn btn-primary" href="/aluno/cadastrar">Cadastre-se</a>
+						<a class="btn btn-primary" href="/aluno/formCadastrar">Cadastre-se</a>
 						<a class="btn btn-default" data-dismiss="modal">Fechar</a>
 						<button type="submit" class="btn btn-primary" id="btn-entrar-modal">Entrar</button>
 					</div>

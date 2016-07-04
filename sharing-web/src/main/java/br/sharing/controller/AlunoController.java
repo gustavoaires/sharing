@@ -2,6 +2,7 @@ package br.sharing.controller;
 
 import java.util.List;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -11,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import br.sharing.dao.IAlunoDAO;
 import br.sharing.encrypt.Criptografia;
@@ -20,6 +22,7 @@ import br.sharing.model.Aluno;
 import br.sharing.model.Atendimento;
 import br.sharing.model.Disciplina;
 import br.sharing.model.Instituicao;
+import br.sharing.util.FileUtil;
 
 @Transactional
 @Controller
@@ -30,14 +33,17 @@ public class AlunoController {
 	private InstituicaoController instituicaoController;
 	private AtendimentoController atendimentoController;
 	private DisciplinaController disciplinaController;
+	private ServletContext servletContext;
 	
 	@Autowired
 	public AlunoController(IAlunoDAO alunoDao, InstituicaoController instituicaoController,
-			AtendimentoController atendimentoController, DisciplinaController disciplinaController) {
+			AtendimentoController atendimentoController, DisciplinaController disciplinaController,
+			ServletContext servletContext) {
 		this.alunoDao = alunoDao;
 		this.atendimentoController = atendimentoController;
 		this.disciplinaController = disciplinaController;
 		this.instituicaoController = instituicaoController;
+		this.servletContext = servletContext;
 	}
 		
 	@RequestMapping("/home")
@@ -145,8 +151,19 @@ public class AlunoController {
 			return "redirect:/aluno/home";
 		} else {
 			model.addAttribute(Atributo.MENSAGEM, Mensagem.USUARIO_SENHA);
+			model.addAttribute(Atributo.ALUNO, candidato);
 			return "/aluno/form_cadastrar";
 		}
+	}
+	
+	@RequestMapping("/fotoPerfil")
+	public String fotoPerfil(@RequestParam(value="image", required=false) MultipartFile image, HttpSession sessao) {
+		if (image != null && !image.isEmpty()) {
+			Aluno a = (Aluno)sessao.getAttribute(Atributo.ALUNO_LOGADO);
+			String pathName = servletContext.getRealPath("/") + "images/" + a.getLogin() + ".png";
+			FileUtil.saveImage(pathName, image);
+		}
+		return "/mensagem";
 	}
 	
 	@RequestMapping("/perfil")
