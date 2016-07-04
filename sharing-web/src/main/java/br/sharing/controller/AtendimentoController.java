@@ -44,7 +44,7 @@ public class AtendimentoController {
 			Atendimento a = new Atendimento();
 			a.setIdAjudante(idAjudante);
 			a.setPediuAjuda((Aluno)sessao.getAttribute(Atributo.ALUNO_LOGADO));
-			a.setDataAtendimendo(dia);
+			a.setDataAtendimento(dia);
 			a.setHoraAtendimento(hora);
 			a.setLocalDeEncontro(local);
 			a.setStatus("aberto");
@@ -64,15 +64,15 @@ public class AtendimentoController {
 			if (al.getLogin().equals(at.getIdAjudante()) && !at.getStatus().equals("fechado")) {
 				at.setStatus("confirmado");
 				atendimentoDao.save(at);
-				model.addAttribute(Atributo.ATENDIMENTO_CONFIRMADO, Mensagem.ATENDIMENTO_CONFIRMADO);
+				model.addAttribute(Atributo.MENSAGEM, Mensagem.ATENDIMENTO_CONFIRMADO);
 			} else
 				throw new Exception("Usuário inválido [" + al.getLogin() + "] tentou confirmar atendimento "
 						+ "[" + at.getId() + "]");
 		} catch(Exception e) {
 			e.printStackTrace();
-			model.addAttribute(Atributo.ERRO, Mensagem.ERRO);
+			model.addAttribute(Atributo.MENSAGEM, Mensagem.ERRO);
 		}
-		return "/mensagem";
+		return "/aluno/home";
 	}
 	
 	@RequestMapping("/negarAtendimento")
@@ -83,15 +83,15 @@ public class AtendimentoController {
 			if (al.getLogin().equals(at.getIdAjudante()) && !at.getStatus().equals("fechado")) {
 				at.setStatus("negado");
 				atendimentoDao.save(at);
-				model.addAttribute(Atributo.ATENDIMENTO_NEGADO, Mensagem.ATENDIMENTO_NEGADO);
+				model.addAttribute(Atributo.MENSAGEM, Mensagem.ATENDIMENTO_NEGADO);
 			} else
 				throw new Exception("Usuário inválido [" + al.getLogin() + "] tentou negar atendimento "
 						+ "[" + at.getId() + "]");
 		} catch(Exception e) {
 			e.printStackTrace();
-			model.addAttribute(Atributo.ERRO, Mensagem.ERRO);
+			model.addAttribute(Atributo.MENSAGEM, Mensagem.ERRO);
 		}
-		return "/mensagem";
+		return "/aluno/home";
 	}
 	
 	@RequestMapping("/cancelarAtendimento")
@@ -102,13 +102,13 @@ public class AtendimentoController {
 			if (al.getLogin().equals(at.getIdPediuAjuda())) {
 				at.setStatus("cancelado");
 				atendimentoDao.save(at);
-				model.addAttribute(Atributo.ATENDIMENTO_FECHADO, Mensagem.ATENDIMENTO_FECHADO);
+				model.addAttribute(Atributo.MENSAGEM, Mensagem.ATENDIMENTO_FECHADO);
 			} else
 				throw new Exception("Usuário inválido [" + al.getLogin() + "] tentou cancelar atendimento "
 						+ "[" + at.getId() + "]");
 		} catch(Exception e) {
 			e.printStackTrace();
-			model.addAttribute(Atributo.ERRO, Mensagem.ERRO);
+			model.addAttribute(Atributo.MENSAGEM, Mensagem.ERRO);
 		}
 		return "/mensagem";
 	}

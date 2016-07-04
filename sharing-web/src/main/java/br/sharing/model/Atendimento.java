@@ -24,7 +24,7 @@ public class Atendimento {
 	private String localDeEncontro;
 	
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
-	private Date dataAtendimendo; 
+	private Date dataAtendimento; 
 	
 	@DateTimeFormat(pattern = "HH:mm")
 	private Date horaAtendimento;
@@ -104,11 +104,11 @@ public class Atendimento {
 	public void setIdPediuAjuda(String idPediuAjuda) {
 		this.idPediuAjuda = idPediuAjuda;
 	}
-	public Date getDataAtendimendo() {
-		return dataAtendimendo;
+	public Date getDataAtendimento() {
+		return dataAtendimento;
 	}
-	public void setDataAtendimendo(Date dataAtendimendo) {
-		this.dataAtendimendo = dataAtendimendo;
+	public void setDataAtendimento(Date dataAtendimento) {
+		this.dataAtendimento = dataAtendimento;
 	}
 	public Date getHoraAtendimento() {
 		return horaAtendimento;

@@ -101,14 +101,14 @@
 					style="background-color: rgba(0, 0, 0, 0.3)">
 					<h1 style="color: #fff">O que fazemos</h1>
 					<p class="text-info" style="color: #fff" contenteditable="true">Queremos
-						promover uma cultura de maior interatividade e cooperação entre
-						os próprios estudantes sem que seja necessária a intervenção
-						ou a parte mais burocrática de um atendimento de monitoria
+						promover uma cultura de maior interatividade e cooperacao entre
+						os proprios estudantes sem que seja necessaria a intervensao
+						ou a parte mais burocratica de um atendimento de monitoria
 						convencional. Obviamente, apoiamos o trabalho da monitoria, mas
-						vemos que nem sempre é um trabalho bem transparente,
-						principalmente para os novos alunos. Então, nossa solução é:
-						diga em que disciplinas está disposto a ajudar e peça ajuda em
-						que disciplina quiser. Marque um horário de troca de conhecimento
+						vemos que nem sempre � um trabalho bem transparente,
+						principalmente para os novos alunos. Então, nossa solucao:
+						diga em que disciplinas estao disposto a ajudar e peca ajuda em
+						que disciplina quiser. Marque um horario de troca de conhecimento
 						com uma colega da faculdade e inicie os estudos.</p>
 					<br/> <br/> <a class="btn btn-lg btn-primary"
 						data-toggle="modal" data-target="#modal-entrar" id="btn-entrar-i"><i
