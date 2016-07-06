@@ -13,8 +13,8 @@ public interface IAtendimentoDAO extends JpaRepository<Atendimento, Long> {
 	@Query("select a from atendimento a where a.idAjudante = :login and a.status = :status")
 	public List<Atendimento> findByLoginAndStatus(@Param("login") String login, @Param("status") String status);
 	
-	@Query("select a from atendimento a where a.status = :status")
-	public List<Atendimento> findByStatus(@Param("status") String status);
+//	@Query("select a from atendimento a where a.status = :status")
+	public List<Atendimento> findByStatus(String status);
 
 	@Query("select avg(a.nota) from atendimento a "
 			+ "where a.idDisciplina = :id_disc and a.idAjudante = :login and a.status = 'avaliado'")

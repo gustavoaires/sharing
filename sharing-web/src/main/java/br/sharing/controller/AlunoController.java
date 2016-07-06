@@ -90,7 +90,7 @@ public class AlunoController {
 			model.addAttribute(Atributo.MENSAGEM, Mensagem.ALTERADO);
 			
 		} catch(Exception e) {
-			model.addAttribute(Atributo.N_ALTERAR_PERFIL, Mensagem.N_ALTERAR_PERFIL);
+			model.addAttribute(Atributo.MENSAGEM, Mensagem.N_ALTERAR_PERFIL);
 		}
 		return "/aluno/home";
 	}
@@ -180,7 +180,6 @@ public class AlunoController {
 				String pathName = servletContext.getRealPath("/") + "images/" + a.getLogin() + ".png";
 				FileUtil.saveImage(pathName, image);
 				model.addAttribute(Atributo.MENSAGEM, Mensagem.FOTO_ALTERADA);
-				return "redirect:/aluno/home";
 			}
 		} catch(Exception e) {
 			model.addAttribute(Atributo.MENSAGEM, Mensagem.FOTO_N_ALTERADA);
@@ -200,10 +199,9 @@ public class AlunoController {
 			List<Disciplina> disciplinas =
 					disciplinaController.getDisciplinaPorAluno(login);
 			model.addAttribute(Atributo.DISCIPLINAS, disciplinas);
-			return "aluno/perfil";
 		} catch(Exception e) {
-			model.addAttribute(Atributo.ERRO, Mensagem.ERRO);
-			return "/mensagem";
+			model.addAttribute(Atributo.MENSAGEM, Mensagem.ERRO);
 		}
+		return "aluno/perfil";
 	}
 }
