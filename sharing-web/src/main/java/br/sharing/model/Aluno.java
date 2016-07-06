@@ -10,16 +10,23 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotNull;
 
 @Entity(name="aluno")
 public class Aluno {
 	@Id
 	@Column(name="id_aluno")
 	private String login;
+	@NotNull
+	private String email;
+	@NotNull
 	private String senha;
+	@NotNull
 	private String primeiroNome;
+	@NotNull
 	private String sobrenome;
 	private String descricao;
+	@NotNull
 	private String horariosDisponiveis;
 	
 	@ManyToMany(mappedBy="alunos", fetch=FetchType.EAGER)
@@ -117,5 +124,11 @@ public class Aluno {
 	}
 	public void removeDisciplina(Disciplina disc) {
 		disciplinas.remove(disc);
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
 	}
 }

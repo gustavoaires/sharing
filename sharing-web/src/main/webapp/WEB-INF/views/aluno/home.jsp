@@ -32,20 +32,17 @@
 			</div>
 			<div class="collapse navbar-collapse" id="navbar-ex-collapse">
 				<ul class="nav navbar-nav navbar-right">
-					<li class="active" id="link-home"><a href="#"
-						><i class="fa fa-fw fa-home"></i>Ini­cio<br /></a>
-					</li>
-					<li><a href="" style="color: #fff"><i
-							class="fa fa-fw fa-info-circle fa-lg text-inverse"></i>O que
-							fazemos</a></li>
-					<li><a href="" style="color: #fff">${aluno_logado.primeiroNome} ${aluno_logado.sobrenome}</a></li>
+					<li><a href="/disciplina/listar" style="color: #fff">Disciplinas</a></li>
+					<li><a href="/aluno/formAlterarPerfil" style="color: #fff">Alterar minhas informações</a></li>
+					<li class="active"><a href="/aluno/home">${aluno_logado.primeiroNome} ${aluno_logado.sobrenome}</a></li>
+					<li><a href="/login/logout" style="color: #fff">Sair</a></li>
 				</ul>
 			</div>
 		</div>
 	</div>
 	<!-- end nav bar -->
 	
-	<span class="text-success"><h3 align="center">${mensagem}</h3></span>
+	<span class="text-info"><h4 align="center">${mensagem}</h4></span>
 	
 	<c:forEach var="a" items="${pedidos_atendimento}">
 		<div class="section">

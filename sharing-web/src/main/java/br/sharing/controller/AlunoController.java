@@ -50,6 +50,8 @@ public class AlunoController {
 	public String home(Model model, HttpSession sessao) {
 		String login = ((Aluno)sessao.getAttribute(Atributo.ALUNO_LOGADO)).getLogin();
 		List<Atendimento> atendimentos = atendimentoController.getPedidosAtendimentoPorStatus(login, "aberto");
+		if (atendimentos.isEmpty())
+			model.addAttribute(Atributo.MENSAGEM, Mensagem.N_PEDIDOS_ATENDIMENTOS);
 		model.addAttribute(Atributo.PEDIDOS_ATENDIMENTO, atendimentos);
 		return "/aluno/home";
 	}
@@ -59,26 +61,36 @@ public class AlunoController {
 		Aluno aluno = (Aluno)sessao.getAttribute(Atributo.ALUNO_LOGADO);
 		if (aluno != null) {
 			model.addAttribute(Atributo.ALUNO, aluno);
+			model.addAttribute(Atributo.INSTITUICOES, instituicaoController.getTodasInstituicoes());
 			return "/aluno/form_alterar_perfil";
 		} else {
 			model.addAttribute(Atributo.MENSAGEM, Mensagem.SESSAO_EXPIRADA);
-			return "/erro";
+			return "/mensagem";
 		}
 	}
 	
 	@RequestMapping("/alterarPerfil")
 	public String alterarPerfil(Aluno aluno, HttpSession sessao, Model model) {
 		try {
+			
 			Aluno alunoSessao = (Aluno)sessao.getAttribute(Atributo.ALUNO_LOGADO);
+			//caso o aluno troque de instituicao, reset as disciplinas
+			if (aluno.getIdInstituicao().equals(alunoSessao.getIdInstituicao())) {
+				alunoSessao.setIdInstituicao(aluno.getIdInstituicao());
+				aluno.setDisciplinas(null);
+			}
+			Aluno a = alunoDao.findByLogin(aluno.getLogin());
+			if (a == null)
+				alunoSessao.setLogin(aluno.getLogin());
 			alunoSessao.setPrimeiroNome(aluno.getPrimeiroNome());
 			alunoSessao.setSobrenome(aluno.getSobrenome());
-			aluno.setLogin(aluno.getLogin());
-			aluno.setDescricao(aluno.getDescricao());
-			aluno.setHorariosDisponiveis(aluno.getHorariosDisponiveis());
-			alunoDao.save(aluno);
+			alunoSessao.setDescricao(aluno.getDescricao());
+			alunoSessao.setHorariosDisponiveis(aluno.getHorariosDisponiveis());
+			alunoDao.save(alunoSessao);
+			model.addAttribute(Atributo.MENSAGEM, Mensagem.ALTERADO);
+			
 		} catch(Exception e) {
 			model.addAttribute(Atributo.N_ALTERAR_PERFIL, Mensagem.N_ALTERAR_PERFIL);
-			return "/erro";
 		}
 		return "/aluno/home";
 	}
@@ -89,20 +101,18 @@ public class AlunoController {
 	}
 	
 	@RequestMapping("/alterarSenha")
-	public String alterarSenha(@RequestParam("senha_atual") String senhaAtual,
-			@RequestParam("nova_senha") String novaSenha, HttpSession sessao, Model model) {
+	public String alterarSenha(@RequestParam("senhaAtual") String senhaAtual,
+			@RequestParam("novaSenha") String novaSenha, HttpSession sessao, Model model) {
 		Aluno a = (Aluno)sessao.getAttribute(Atributo.ALUNO_LOGADO);
-		if (a.getSenha().equals(Criptografia.criptografar(senhaAtual)))
+		if (a.getSenha().equals(Criptografia.criptografar(senhaAtual))) {
 			a.setSenha(Criptografia.criptografar(novaSenha));
-		else {
-			model.addAttribute(Atributo.N_ALTERAR_SENHA, Mensagem.N_ALTERAR_SENHA);
-			/*
-			 * Verificar se vai dar certo para esse mapping acessar essa mensagem depois do redirect
-			 */
-			return "redirect:formAlterarSenha";
+			alunoDao.save(a);
+			model.addAttribute(Atributo.MENSAGEM, Mensagem.SENHA_ALTERADA);
 		}
-		model.addAttribute(Atributo.SENHA_ALTERADA, Mensagem.SENHA_ALTERADA);
-		return "/aluno/home";
+		else {
+			model.addAttribute(Atributo.MENSAGEM, Mensagem.N_ALTERAR_SENHA);
+		}
+		return "/aluno/form_alterar_senha";
 	}
 	
 	@RequestMapping("/listarMinhasDisciplinas")
@@ -156,14 +166,26 @@ public class AlunoController {
 		}
 	}
 	
-	@RequestMapping("/fotoPerfil")
-	public String fotoPerfil(@RequestParam(value="image", required=false) MultipartFile image, HttpSession sessao) {
-		if (image != null && !image.isEmpty()) {
-			Aluno a = (Aluno)sessao.getAttribute(Atributo.ALUNO_LOGADO);
-			String pathName = servletContext.getRealPath("/") + "images/" + a.getLogin() + ".png";
-			FileUtil.saveImage(pathName, image);
+	@RequestMapping("/pageAlterarFoto")
+	public String pageAlterarFoto() {
+		return "aluno/page_alterar_foto";
+	}
+	
+	@RequestMapping("/alterarFoto")
+	public String alterarFoto(@RequestParam(value="image", required=false) MultipartFile image,
+			HttpSession sessao, Model model) {
+		try {
+			if (image != null && !image.isEmpty()) {
+				Aluno a = (Aluno)sessao.getAttribute(Atributo.ALUNO_LOGADO);
+				String pathName = servletContext.getRealPath("/") + "images/" + a.getLogin() + ".png";
+				FileUtil.saveImage(pathName, image);
+				model.addAttribute(Atributo.MENSAGEM, Mensagem.FOTO_ALTERADA);
+				return "redirect:/aluno/home";
+			}
+		} catch(Exception e) {
+			model.addAttribute(Atributo.MENSAGEM, Mensagem.FOTO_N_ALTERADA);
 		}
-		return "/mensagem";
+		return "/aluno/page_alterar_foto";
 	}
 	
 	@RequestMapping("/perfil")

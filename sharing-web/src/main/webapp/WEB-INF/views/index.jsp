@@ -33,6 +33,7 @@
 						</li>
 						<li><a href="#what-we-do" style="color: #fff" class="scroll"><i
 								class="fa fa-fw fa-info-circle fa-lg text-inverse"></i>O que fazemos</a></li>
+						<li><a href="/aluno/formCadastrar" style="color: #fff">Cadastre-se</a></li>
 					</ul>
 				</div>
 			</div>
@@ -42,7 +43,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-md-12 text-center"
-					style="background-color: rgba(0, 0, 0, 0.2)">
+					style="background-color: rgba(0, 0, 0, 0.2); border-radius:5px">
 					<h1 style="color: #fff">Sharing</h1>
 					<p contenteditable="true" style="color: #fff">Compartilhe
 						conhecimento :)</p>

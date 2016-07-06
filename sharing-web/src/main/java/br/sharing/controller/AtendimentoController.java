@@ -110,7 +110,7 @@ public class AtendimentoController {
 			e.printStackTrace();
 			model.addAttribute(Atributo.MENSAGEM, Mensagem.ERRO);
 		}
-		return "/mensagem";
+		return "/aluno/home";
 	}
 	
 	/**

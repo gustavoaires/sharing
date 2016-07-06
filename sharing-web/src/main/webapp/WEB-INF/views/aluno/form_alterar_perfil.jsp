@@ -33,8 +33,11 @@
 			</div>
 			<div class="collapse navbar-collapse" id="navbar-ex-collapse">
 				<ul class="nav navbar-nav navbar-right">
-					<li><a href="/" style="color:#fff">Home</a></li>
-					<li><a class="active" href="#" style="color:#fff">Cadastro</a></li>
+					<li><a href="/aluno/home" style="color:#fff">Home</a></li>
+					<li><a href="/aluno/formAlterarSenha" style="color:#fff">Alterar senha</a></li>
+					<li><a href="/aluno/pageAlterarFoto" style="color:#fff">Alterar foto</a></li>
+					<li class="active"><a href="#">Alterando perfil</a></li>
+					<li><a href="/login/logout" style="color: #fff">Sair</a></li>
 				</ul>
 			</div>
 		</div>
@@ -44,53 +47,47 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-md-6 col-md-offset-3">
-					<form role="form" action="/aluno/cadastrar" method="post">
+					<form role="form" action="/aluno/alterarPerfil" method="post">
 						<div class="form-group">
 							<label class="control-label" for="primeiroNome">Nome</label>
 							<input class="form-control" id="primeiroNome" name="primeiroNome"
-								placeholder="Nome" type="text" value="${aluno.primeiroNome}"/>
+								type="text" value="${aluno.primeiroNome}"/>
 						</div>
 						<div class="form-group">
 							<label class="control-label" for="sobrenome">Sobrenome</label>
 							<input class="form-control" id="sobrenome" name="sobrenome"
-								placeholder="Sobrenome" type="text" value="${aluno.sobrenome}"/>
+								type="text" value="${aluno.sobrenome}"/>
 						</div>
 						<div class="form-group">
 							<label class="control-label" for="descricao">Descricao</label>
 							<input class="form-control" id="descricao" name="descricao" value="${aluno.descricao}"
-								placeholder="Escreva um pouco sobre voce. Suas areas de interesse, disciplinas que gosta, etc."
 								type="text"/>
 						</div>
 						<div class="form-group">
 							<label class="control-label" for="horariosDisponiveis">Horarios disponiveis</label>
 							<input class="form-control" id="horariosDisponiveis" name="horariosDisponiveis"
-								placeholder="Segunda: 10h-12h, Terca:13h-14" value="${aluno.horariosDisponiveis}" type="text"/>
+								value="${aluno.horariosDisponiveis}" type="text"/>
 						</div>
 						<div class="form-group">
 							<label class="control-label" for="login">Login</label>
 							<input class="form-control" id="login" name="login" value="${aluno.login}"
-								placeholder="exemplomeulogin" type="text"/>
+								type="text"/>
 						</div>
 						<div class="form-group">
 							<label class="control-label" for="email">Login</label>
 							<input class="form-control" id="email" name="email" value="${aluno.email}"
-								placeholder="meuemail@mail.com" type="text"/>
+								type="text"/>
 						</div>
 						<div class="form-group">
-							<label class="control-label" for="senha">Senha</label>
-							<input class="form-control" id="senha" name="senha"
-								placeholder="senha" type="password"/>
-						</div>
-						<div class="form-group">
-							<label class="control-label" for="instituicao">Instituicao</label>
-							<select	class="form-control" name="instituicao" id="instituicao">												
-								<option>Selecione uma instituicao</option>
+							<label class="control-label" for="idInstituicao">Instituicao</label>
+							<select	class="form-control" name="idInstituicao" id="idInstituicao">												
+								<option>Selecione um tipo de conta</option>
 								<c:forEach items="${instituicoes}" var="i">
 									<option value="${i.id}">${i.nome}</option>
 								</c:forEach>
 							</select>
 						</div>
-						<button type="submit" class="btn btn-primary">Concluir cadastro</button>
+						<button type="submit" class="btn btn-primary">Alterar</button>
 					</form>
 				</div>
 			</div>

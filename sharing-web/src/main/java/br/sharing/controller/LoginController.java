@@ -20,10 +20,10 @@ public class LoginController {
 	@Autowired
 	private IAlunoDAO alunoDao;
 	
-	@RequestMapping("/form")
-	public String formLogin() {
-		return "/login/form_login";
-	}
+//	@RequestMapping("/form")
+//	public String formLogin() {
+//		return "/login/form_login";
+//	}
 	
 	@RequestMapping("/loginAssert")
 	public String login(String login, String senha, HttpSession sessao) {

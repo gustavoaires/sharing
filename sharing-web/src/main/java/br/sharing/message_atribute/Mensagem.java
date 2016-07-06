@@ -22,5 +22,8 @@ public class Mensagem {
 	public static final String ATENDIMENTO_NEGADO = "Atendimento negado com sucesso!";
 	public static final String ATENDIMENTO_FECHADO = "Pedido de atendimento negado com sucesso";
 	public static final String ATENDIMENTO_AVALIADO = "Atendimento avaliado com sucesso!";
+	public static final String N_PEDIDOS_ATENDIMENTOS = "Não há pedidos de atendimento em aberto";
+	public static final String FOTO_ALTERADA = "Foto alterada com sucesso!";
+	public static final String FOTO_N_ALTERADA = "Foto não foi alterada.";
 	
 }
