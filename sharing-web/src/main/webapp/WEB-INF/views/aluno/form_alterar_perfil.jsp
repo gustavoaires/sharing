@@ -74,7 +74,7 @@
 								type="text"/>
 						</div>
 						<div class="form-group">
-							<label class="control-label" for="email">Login</label>
+							<label class="control-label" for="email">Email</label>
 							<input class="form-control" id="email" name="email" value="${aluno.email}"
 								type="text"/>
 						</div>
