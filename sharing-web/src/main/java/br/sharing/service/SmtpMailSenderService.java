@@ -68,11 +68,13 @@ public class SmtpMailSenderService {
 	
 	@SuppressWarnings("static-access")
 	public boolean ehAmanha(Date atendimento) {
-		Calendar agora = Calendar.getInstance();
-		Calendar data = Calendar.getInstance();
-		data.setTime(atendimento);
-		if (agora.YEAR == data.YEAR && agora.DAY_OF_YEAR+1 == data.DAY_OF_YEAR)
-			return true;
+		if (atendimento != null) {
+			Calendar agora = Calendar.getInstance();
+			Calendar data = Calendar.getInstance();
+			data.setTime(atendimento);
+			if (agora.YEAR == data.YEAR && agora.DAY_OF_YEAR+1 == data.DAY_OF_YEAR)
+				return true;
+		}
 		return false;
 	}
 

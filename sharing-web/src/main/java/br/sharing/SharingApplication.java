@@ -41,9 +41,14 @@ public class SharingApplication extends SpringBootServletInitializer implements 
 				while (true) {
 					atual = new Date();
 					if (atual.getHours() == meiaNoite.getHours() 
-							&& atual.getMinutes() == meiaNoite.getMinutes()
-							&& atual.getSeconds() == meiaNoite.getSeconds())
+							&& atual.getMinutes() == meiaNoite.getMinutes()) {
 						mailSender.configurarEEnviarEmails();
+						try {
+							Thread.sleep(60000);
+						} catch (InterruptedException e) {
+							continue;
+						}
+					}
 				}
 			}
 		});

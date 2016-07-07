@@ -25,5 +25,6 @@ public class Mensagem {
 	public static final String N_PEDIDOS_ATENDIMENTOS = "Não há pedidos de atendimento em aberto";
 	public static final String FOTO_ALTERADA = "Foto alterada com sucesso!";
 	public static final String FOTO_N_ALTERADA = "Foto não foi alterada.";
+	public static final String LISTAR_DISCIPLINAS = "Selecione a disciplina que em que você precisa de ajuda.";
 	
 }

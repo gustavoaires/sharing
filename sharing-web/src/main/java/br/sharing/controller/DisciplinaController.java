@@ -2,6 +2,8 @@ package br.sharing.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -45,20 +47,23 @@ public class DisciplinaController {
 	}
 
 	@RequestMapping("/listar")
-	public String listar(Model model) {
+	public String listar(Model model, HttpSession sessao) {
 		try {
-			List<Disciplina> disciplinas = disciplinaDao.findAll();
+			Aluno a = (Aluno)sessao.getAttribute(Atributo.ALUNO_LOGADO);
+			List<Disciplina> disciplinas = disciplinaDao.findByIdInstituicao(a.getIdInstituicao());
 			model.addAttribute(Atributo.DISCIPLINAS, disciplinas);
+			model.addAttribute(Atributo.MENSAGEM, Mensagem.LISTAR_DISCIPLINAS);
 			return "/disciplina/listar";
 		} catch(Exception e) {
 			model.addAttribute(Atributo.MENSAGEM, Mensagem.N_LISTAR);
-			return "/mensagem";
+			return "/disciplina/listar";
 		}
 	}
 	
 	@RequestMapping("/verDisciplina")
 	public String verDisciplina(Long id, Model model) {
 		List<Aluno> alunos = verDisciplina.getAlunosDisciplina(id);
+		System.out.println("AQUIIIIIIIIIIIIIIIIIIIIIIIIIIII");
 		if (alunos != null) {
 			model.addAttribute(Atributo.ALUNOS, alunos);
 			for (Aluno a : alunos)
