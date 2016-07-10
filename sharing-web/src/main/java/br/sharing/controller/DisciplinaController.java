@@ -64,13 +64,13 @@ public class DisciplinaController {
 	public String verDisciplina(Long id, Model model) {
 		List<Aluno> alunos = verDisciplina.getAlunosDisciplina(id);
 		Disciplina disciplina = disciplinaDao.findOne(id);
-		if (alunos != null) {
-			model.addAttribute(Atributo.DISCIPLINA, disciplina);
+		if (!alunos.isEmpty()) {
 			for (Aluno a : alunos)
 				a.setMedia(verDisciplina.getMediaAluno(id, a.getLogin()));
 			model.addAttribute(Atributo.ALUNOS, alunos);
 		} else
 			model.addAttribute(Atributo.MENSAGEM, Mensagem.N_ALUNOS);
+		model.addAttribute(Atributo.DISCIPLINA, disciplina);
 		return "/disciplina/ver_disciplina";
 	}
 	

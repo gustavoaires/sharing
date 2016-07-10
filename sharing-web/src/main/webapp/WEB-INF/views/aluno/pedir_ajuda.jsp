@@ -28,6 +28,7 @@
 						class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
+				<a class="navbar-brand" href="/aluno/home" style="color:#fff"><span>Sharing</span></a>
 			</div>
 			<div class="collapse navbar-collapse" id="navbar-ex-collapse">
 				<ul class="nav navbar-nav navbar-right">
@@ -52,7 +53,7 @@
 						envie a solicitação</h3>
 					<div class="form-group">
 						<div class="col-sm-1">
-							<label for="inputEmail3" class="control-label">Local</label>
+							<label for="localAtendimento" class="control-label">Local</label>
 						</div>
 						<div class="col-sm-8">
 							<input type="text" class="form-control" id="local"

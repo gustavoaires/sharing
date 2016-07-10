@@ -72,27 +72,27 @@ public class AlunoController {
 	@RequestMapping("/alterarPerfil")
 	public String alterarPerfil(Aluno aluno, HttpSession sessao, Model model) {
 		try {
-			
 			Aluno alunoSessao = (Aluno)sessao.getAttribute(Atributo.ALUNO_LOGADO);
 			//caso o aluno troque de instituicao, reset as disciplinas
 			if (aluno.getIdInstituicao().equals(alunoSessao.getIdInstituicao())) {
 				alunoSessao.setIdInstituicao(aluno.getIdInstituicao());
 				aluno.setDisciplinas(null);
 			}
-			Aluno a = alunoDao.findByLogin(aluno.getLogin());
-			if (a == null)
-				alunoSessao.setLogin(aluno.getLogin());
+//			Aluno a = alunoDao.findByLogin(aluno.getLogin());
+//			if (a == null)
+//				alunoSessao.setLogin(aluno.getLogin());
 			alunoSessao.setPrimeiroNome(aluno.getPrimeiroNome());
 			alunoSessao.setSobrenome(aluno.getSobrenome());
 			alunoSessao.setDescricao(aluno.getDescricao());
 			alunoSessao.setHorariosDisponiveis(aluno.getHorariosDisponiveis());
+			alunoSessao.setEmail(aluno.getEmail());
 			alunoDao.save(alunoSessao);
 			model.addAttribute(Atributo.MENSAGEM, Mensagem.ALTERADO);
 			
 		} catch(Exception e) {
 			model.addAttribute(Atributo.MENSAGEM, Mensagem.N_ALTERAR_PERFIL);
 		}
-		return "/aluno/home";
+		return "/aluno/form_alterar_perfil";
 	}
 	
 	@RequestMapping("/pedirAjuda")
@@ -198,17 +198,19 @@ public class AlunoController {
 	public String perfil(String login, Model model) {
 		try {
 			List<Atendimento> confirmados = 
-					atendimentoController.getPedidosAtendimentoPorStatus(login, "confirmados");
+					atendimentoController.getPedidosAtendimentoPorStatus(login, "confirmado");
 			model.addAttribute(Atributo.ATENDIMENTOS_CONFIRMADOS, confirmados);
 			List<Atendimento> negados =
-					atendimentoController.getPedidosAtendimentoPorStatus(login, "negados");
+					atendimentoController.getPedidosAtendimentoPorStatus(login, "negado");
 			model.addAttribute(Atributo.ATENDIMENTOS_NEGADOS, negados);
 			List<Disciplina> disciplinas =
 					disciplinaController.getDisciplinaPorAluno(login);
 			model.addAttribute(Atributo.DISCIPLINAS, disciplinas);
+			Aluno a = alunoDao.findOne(login);
+			model.addAttribute(Atributo.ALUNO, a);
 		} catch(Exception e) {
 			model.addAttribute(Atributo.MENSAGEM, Mensagem.ERRO);
 		}
-		return "aluno/perfil";
+		return "/aluno/perfil";
 	}
 }

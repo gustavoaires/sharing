@@ -29,7 +29,7 @@
 						class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="/" style="color:#fff"><span>Sharing</span></a>
+				<a class="navbar-brand" href="#" style="color:#fff"><span>Sharing</span></a>
 			</div>
 			<div class="collapse navbar-collapse" id="navbar-ex-collapse">
 				<ul class="nav navbar-nav navbar-right">
@@ -42,7 +42,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="section text-warning col-md-6 col-md-offset-3"><h4>${mensagem}<h4></div>
+	<div class="section text-info"><h4 align="center">${mensagem}<h4></div>
 	<div class="section">
 		<div class="container">
 			<div class="row">
@@ -68,11 +68,11 @@
 							<input class="form-control" id="horariosDisponiveis" name="horariosDisponiveis"
 								value="${aluno.horariosDisponiveis}" type="text"/>
 						</div>
-						<div class="form-group">
+						<!--<div class="form-group">
 							<label class="control-label" for="login">Login</label>
 							<input class="form-control" id="login" name="login" value="${aluno.login}"
 								type="text"/>
-						</div>
+						</div>-->
 						<div class="form-group">
 							<label class="control-label" for="email">Email</label>
 							<input class="form-control" id="email" name="email" value="${aluno.email}"
@@ -81,7 +81,7 @@
 						<div class="form-group">
 							<label class="control-label" for="idInstituicao">Instituicao</label>
 							<select	class="form-control" name="idInstituicao" id="idInstituicao">												
-								<option>Selecione um tipo de conta</option>
+								<option>Selecione uma instituição</option>
 								<c:forEach items="${instituicoes}" var="i">
 									<option value="${i.id}">${i.nome}</option>
 								</c:forEach>

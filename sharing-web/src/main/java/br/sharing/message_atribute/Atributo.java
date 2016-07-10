@@ -20,7 +20,7 @@ public class Atributo {
 	public static final String ATENDIMENTO_NEGADO = "atendimento_negado";
 	public static final String ATENDIMENTO_FECHADO = "atendimento_fechado";
 	public static final String ATENDIMENTO_AVALIADO = "atendimento_avaliado";
-	public static final String ATENDIMENTOS_CONFIRMADOS = "atendimentos_conformados";
+	public static final String ATENDIMENTOS_CONFIRMADOS = "atendimentos_confirmados";
 	public static final String MEUS_PEDIDOS_ATENDIMENTOS = "meus_pedidos_atendimentos";
 	public static final String ATENDIMENTOS_NEGADOS = "atendimentos_negados";
 }

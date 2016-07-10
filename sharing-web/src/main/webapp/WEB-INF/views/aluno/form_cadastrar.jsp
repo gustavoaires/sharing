@@ -29,7 +29,7 @@
 						class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="/" style="color:#fff"><span>Sharing</span></a>
+				<a class="navbar-brand" href="/aluno/home" style="color:#fff"><span>Sharing</span></a>
 			</div>
 			<div class="collapse navbar-collapse" id="navbar-ex-collapse">
 				<ul class="nav navbar-nav navbar-right">

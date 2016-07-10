@@ -2,7 +2,7 @@ package br.sharing.message_atribute;
 
 public class Mensagem {
 
-	public static final String N_ALUNOS = "";
+	public static final String N_ALUNOS = "Nenhum aluno se disponibilizou nessa disciplina.";
 	public static final String INSERIDO = "Inserido com sucesso!";
 	public static final String N_INSERIDO = "Não foi possível inserir!";
 	public static final String N_LISTAR = "Ocorreu um problema para encontrar os dados que você procura!";

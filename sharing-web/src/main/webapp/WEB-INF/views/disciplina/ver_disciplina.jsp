@@ -29,15 +29,18 @@
 						class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
+				<a class="navbar-brand" href="/aluno/home" style="color:#fff"><span>Sharing</span></a>
 			</div>
 			<div class="collapse navbar-collapse" id="navbar-ex-collapse">
 				<ul class="nav navbar-nav navbar-right">
-					<li ><a href="/aluno/home" style="color: #fff"><i class="fa fa-fw fa-home"></i>Home</a></li>
 					<li class="active"><a href="#"><i class="fa fa-fw fa-book"></i>${disciplina.nome}</a></li>
 					<li><a href="#" style="color: #fff"><i
 							class="fa fa-fw fa-pencil"></i>Minhas disciplinas</a></li>
+					<li><a href="/aluno/home" style="color: #fff">
+						${aluno_logado.primeiroNome} ${aluno_logado.sobrenome}</a></li>
 					<li><a href="#" style="color: #fff"><i
 							class="fa fa-fw fa-cogs"></i>Meu Perfil</a></li>
+					<li><a href="/login/logout" style="color: #fff">Sair</a></li>
 				</ul>
 			</div>
 		</div>
@@ -46,9 +49,12 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-md-12">
-					<h1 class="text-center">Escolha alguém e peça ajuda</h1>
-					<p class="text-center">Marque um horário e local através do
-						Sharing</p>
+					<c:if test="${empty alunos}"><h2 align="center">${mensagem}</h2></c:if>
+					<c:if test="${not empty alunos}">
+						<h1 class="text-center">Escolha alguém e peça ajuda</h1>
+						<p class="text-center">Marque um horário e local através do
+							Sharing</p>
+					</c:if>
 				</div>
 			</div>
 			<c:forEach var="a" items="${alunos}">
@@ -58,6 +64,7 @@
 					</div>
 					<div class="col-md-4">
 						<h3 class="text-left">${a.primeiroNome} ${a.sobrenome}</h3>
+						<h4>Ver perfil: <a href="/aluno/perfil?login=${a.login}">${a.login}</a> </h4>
 						<p class="text-left">${a.horariosDisponiveis}</p>
 						<div class="progress">
 							<div class="progress-bar" role="progressbar" style="width: ${a.media}%">${a.media}% recomendado</div>
