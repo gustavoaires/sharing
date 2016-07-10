@@ -42,7 +42,6 @@ public class AtendimentoController {
 			a.setDataAtendimento(dia);
 			a.setHoraAtendimento(hora);
 			a.setLocalDeEncontro(local);
-			a.setStatus("aberto");
 			atendimentoDao.save(a);
 			model.addAttribute(Atributo.MENSAGEM, Mensagem.INSERIDO);
 		} catch(Exception e) {
