@@ -95,6 +95,13 @@ public class AlunoController {
 		return "/aluno/home";
 	}
 	
+	@RequestMapping("/pedirAjuda")
+	public String pedirAjuda(String idAjudante, Model model) {
+		Aluno aluno = alunoDao.findOne(idAjudante);
+		model.addAttribute(Atributo.ALUNO, aluno);
+		return "/aluno/pedir_ajuda";
+	}
+	
 	@RequestMapping("/formAlterarSenha")
 	public String formAlterarSenha() {
 		return "/aluno/form_alterar_senha";

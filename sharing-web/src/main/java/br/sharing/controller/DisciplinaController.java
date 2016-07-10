@@ -63,13 +63,14 @@ public class DisciplinaController {
 	@RequestMapping("/verDisciplina")
 	public String verDisciplina(Long id, Model model) {
 		List<Aluno> alunos = verDisciplina.getAlunosDisciplina(id);
-		System.out.println("AQUIIIIIIIIIIIIIIIIIIIIIIIIIIII");
+		Disciplina disciplina = disciplinaDao.findOne(id);
 		if (alunos != null) {
-			model.addAttribute(Atributo.ALUNOS, alunos);
+			model.addAttribute(Atributo.DISCIPLINA, disciplina);
 			for (Aluno a : alunos)
-				model.addAttribute("media_"+a.getLogin(), verDisciplina.getMediaAluno(id, a.getLogin()));
+				a.setMedia(verDisciplina.getMediaAluno(id, a.getLogin()));
+			model.addAttribute(Atributo.ALUNOS, alunos);
 		} else
-			model.addAttribute(Atributo.N_ALUNOS, Mensagem.N_ALUNOS);
+			model.addAttribute(Atributo.MENSAGEM, Mensagem.N_ALUNOS);
 		return "/disciplina/ver_disciplina";
 	}
 	

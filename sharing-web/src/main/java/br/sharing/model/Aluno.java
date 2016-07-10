@@ -28,6 +28,7 @@ public class Aluno {
 	private String descricao;
 	@NotNull
 	private String horariosDisponiveis;
+	private Double media;
 	
 	@ManyToMany(mappedBy="alunos", fetch=FetchType.EAGER)
 	private List<Disciplina> disciplinas;
@@ -91,6 +92,12 @@ public class Aluno {
 	}
 	public String getLogin() {
 		return login;
+	}
+	public Double getMedia() {
+		return media;
+	}
+	public void setMedia(Double media) {
+		this.media = media;
 	}
 	public void setLogin(String login) {
 		this.login = login;

@@ -30,13 +30,8 @@ public class AtendimentoController {
 		this.atendimentoDao = atendimentoDao;
 	}
 	
-	@RequestMapping("/pedirAjuda")
-	public String pedirAjuda() {
-		return "/atendimento/pedir_ajuda";
-	}
-	
-	@RequestMapping("/enviarSolicitacao")
-	public String enviarSolicitacao(String idAjudante, 
+	@RequestMapping("/cadastrarSolicitacao")
+	public String cadastrarSolicitacao(String idAjudante, 
 			@DateTimeFormat(pattern="dd/MM/yyyy") Date dia, 
 			@DateTimeFormat(pattern="HH:mm") Date hora, 
 			String local, Model model, HttpSession sessao) {
