@@ -1,5 +1,4 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -29,17 +28,29 @@
 						class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="/aluno/home" style="color:#fff"><span>Sharing</span></a>
+				<a class="navbar-brand" href="/aluno/home" style="color: #fff"><span>Sharing</span></a>
 			</div>
 			<div class="collapse navbar-collapse" id="navbar-ex-collapse">
 				<ul class="nav navbar-nav navbar-right">
-					<li class="active"><a href="#"><i class="fa fa-fw fa-book"></i>${disciplina.nome}</a></li>
-					<li><a href="/aluno/home" style="color: #fff">
-						${aluno_logado.primeiroNome} ${aluno_logado.sobrenome}</a></li>
-					<li><a href="#" style="color: #fff"><i
-							class="fa fa-fw fa-cogs"></i>Meu Perfil</a></li>
+					<li class="active"><a href="#">Disciplinas</a></li>
+					<li><a href="/aluno/formAlterarPerfil" style="color: #fff">Alterar
+							minhas informações</a></li>
+					<li><a href="/aluno/home" style="color: #fff">${aluno_logado.primeiroNome}
+							${aluno_logado.sobrenome}</a></li>
 					<li><a href="/login/logout" style="color: #fff">Sair</a></li>
 				</ul>
+			</div>
+		</div>
+	</div>
+
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<h3 align="center">Clique na disciplina para estar disponível
+					para atendimento</h3>
+				<p>
+				<h2 contenteditable="true" class="text-center">${mensagem}</h2>
+				<hr>
 			</div>
 		</div>
 	</div>
@@ -47,32 +58,22 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-md-12">
-					<c:if test="${empty alunos}"><h2 align="center">${mensagem}</h2></c:if>
-					<c:if test="${not empty alunos}">
-						<h1 class="text-center">Escolha alguém e peça ajuda</h1>
-						<p class="text-center">Marque um horário e local através do
-							Sharing</p>
-					</c:if>
+					<div class="list-group">
+						<c:forEach items="${disciplinas}" var="d">
+							<a href="#" onclick="adicionarDisciplina(${d.id})"
+								class="list-group-item ${aluno_logado.temDisciplina(d) ? 'active' : ''}">
+								${d.nome}</a>
+						</c:forEach>
+					</div>
 				</div>
 			</div>
-			<c:forEach var="a" items="${alunos}">
-				<div class="row col-md-offset-3">
-					<div class="col-md-2">
-						<img src="img/steve.jpeg" class="img-circle img-responsive">
-					</div>
-					<div class="col-md-4">
-						<h3 class="text-left">${a.primeiroNome} ${a.sobrenome}</h3>
-						<h4>Ver perfil: <a href="/aluno/perfil?login=${a.login}">${a.login}</a> </h4>
-						<p class="text-left">${a.horariosDisponiveis}</p>
-						<div class="progress">
-							<div class="progress-bar" role="progressbar" style="width: ${a.media}%">${a.media}% recomendado</div>
-						</div>
-						<a class="btn btn-success" href="/aluno/pedirAjuda?idAjudante=${a.login}">Pedir ajuda</a>
-					</div>
-				</div>
-			</c:forEach>
 		</div>
 	</div>
-
+	<!-- end listar disciplinas -->
+	<script type="text/javascript">
+		function adicionarDisciplina(id) {
+			$.get("/aluno/adicionarMinhaDisciplina?id="+id);
+		}
+	</script>
 </body>
 </html>

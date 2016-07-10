@@ -1,5 +1,6 @@
 package br.sharing.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -7,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -30,7 +32,10 @@ public class Aluno {
 	private String horariosDisponiveis;
 	private Double media;
 	
-	@ManyToMany(mappedBy="alunos", fetch=FetchType.EAGER)
+	@ManyToMany(fetch=FetchType.EAGER)
+	@JoinTable(name="aluno_disciplina",
+		joinColumns=@JoinColumn(name="id_aluno", referencedColumnName="id_aluno"),
+		inverseJoinColumns=@JoinColumn(name="id_disciplina", referencedColumnName="id_disciplina"))
 	private List<Disciplina> disciplinas;
 	
 	/*
@@ -127,15 +132,27 @@ public class Aluno {
 		this.descricao = descricao;
 	}
 	public void addDisciplina(Disciplina disciplina) {
-		disciplinas.add(disciplina);
+		if (!temDisciplina(disciplina))
+			disciplinas.add(disciplina);
 	}
 	public void removeDisciplina(Disciplina disc) {
-		disciplinas.remove(disc);
+		List<Disciplina> discs = new ArrayList<>();
+		for (Disciplina d : disciplinas)
+			if (d.equals(disc))
+				discs.add(d);
+		for (Disciplina d : discs)
+			disciplinas.remove(d);
 	}
 	public String getEmail() {
 		return email;
 	}
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	public boolean temDisciplina(Disciplina disc) {
+		for (Disciplina d : disciplinas)
+			if (d.equals(disc))
+				return true;
+		return false;
 	}
 }

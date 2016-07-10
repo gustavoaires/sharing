@@ -23,4 +23,6 @@ public class Atributo {
 	public static final String ATENDIMENTOS_CONFIRMADOS = "atendimentos_confirmados";
 	public static final String MEUS_PEDIDOS_ATENDIMENTOS = "meus_pedidos_atendimentos";
 	public static final String ATENDIMENTOS_NEGADOS = "atendimentos_negados";
+	public static final String ATENDIMENTOS_AVALIADOS = "atendimentos_avaliados";
+	public static final String DISCIPLINAS_ALUNO = "disciplinas_aluno";
 }

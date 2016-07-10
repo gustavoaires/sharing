@@ -20,11 +20,6 @@ public class LoginController {
 	@Autowired
 	private IAlunoDAO alunoDao;
 	
-//	@RequestMapping("/form")
-//	public String formLogin() {
-//		return "/login/form_login";
-//	}
-	
 	@RequestMapping("/loginAssert")
 	public String login(String login, String senha, HttpSession sessao) {
 		Aluno candidato = alunoDao.findByLogin(login);
@@ -40,6 +35,7 @@ public class LoginController {
 	
 	@RequestMapping("/logout")
 	public String logout(HttpSession session){
+		alunoDao.save((Aluno)session.getAttribute(Atributo.ALUNO_LOGADO));
 		session.invalidate(); 
 		return "redirect:/";
 	}

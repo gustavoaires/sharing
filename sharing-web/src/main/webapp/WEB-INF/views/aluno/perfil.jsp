@@ -49,14 +49,14 @@
 
 	<div class="section">
 		<div class="container">
-			<div class="col-md-4">
+			<div class="col-md-3">
 				<p align="center">
-					<span class="text-success"> ${aluno.primeiroNome} ${empty atendimentos_confirmados ?
-							" não confirmou atendimentos ainda" :
-							" aceitou estes atendimentos"}
+					<span class="text-info"> ${aluno.primeiroNome} ${empty atendimentos_confirmados ?
+							" não possui atendimentos avaliados" :
+							" foi avaliado nestes atendimentos"}
 					</span>
 				</p>
-				<c:forEach var="a" items="${atendimentos_confirmados}">
+				<c:forEach var="a" items="${atendimentos_avaliados}">
 					<div class="row"
 						style="background-color: rgba(0, 0, 0, 0.1); border-radius: 5px">
 						<div>
@@ -88,8 +88,44 @@
 					<hr>
 				</c:forEach>
 			</div>
+			<!-- end atendimentos avalidados -->
+			<div class="col-md-3 col-md-offset-1">
+				<p align="center">
+					<span class="text-success"> ${aluno.primeiroNome} ${empty atendimentos_confirmados ?
+							" não confirmou atendimentos ainda" :
+							" aceitou estes atendimentos"}
+					</span>
+				</p>
+				<c:forEach var="a" items="${atendimentos_confirmados}">
+					<div class="row"
+						style="background-color: rgba(0, 0, 0, 0.1); border-radius: 5px">
+						<div>
+							<p class="text-muted">
+								Nome: <span class="text-primary">${a.pediuAjuda.primeiroNome}
+									${a.pediuAjuda.sobrenome}</span>
+							</p>
+							<p class="text-muted">
+								Disciplina: <span class="text-primary" id="disciplina">${a.disciplina.nome}</span>
+							<p class="text-muted">
+							</p>
+							<p class="text-muted">
+								Local de encontro: <span class="text-primary">${a.localDeEncontro}</span>
+							</p>
+							<p class="text-muted">
+								Data do atendimento: <span class="text-primary" id="data"><fmt:formatDate
+										pattern="dd/MM/yyyy" value="${a.dataAtendimento}" /></span>
+							</p>
+							<p class="text-muted">
+								Horario do atendimento: <span class="text-primary" id="horario"><fmt:formatDate
+										pattern="HH:mm" value="${a.horaAtendimento}" /></span>
+							</p>
+						</div>
+					</div>
+					<hr>
+				</c:forEach>
+			</div>
 			<!-- end atendimentos confirmados-->
-			<div class="col-md-4 col-md-offset-1 ">
+			<div class="col-md-3 col-md-offset-1 ">
 				<p align="center">
 					<span class="text-danger"> ${aluno.primeiroNome} ${empty atendimentos_confirmados ?
 							" não negou atendimentos ainda" :
@@ -125,7 +161,7 @@
 				</c:forEach>
 			</div>
 			<!-- end atendimentos negados -->
-			<div class="col-md-2 col-sm-offset-1 ">
+			<div class="col-md-3 col-sm-offset-1 ">
 				<p align="center">
 					<span class="text-info">Disciplinas que
 						${aluno.primeiroNome} está disponível</span>

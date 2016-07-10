@@ -9,7 +9,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -38,10 +37,7 @@ public class Disciplina {
 	/*
 	 * Relacionando essa disciplina com seus alunos
 	 */
-	@ManyToMany(fetch=FetchType.EAGER)
-	@JoinTable(name="aluno_disciplina",
-		joinColumns=@JoinColumn(name="id_disciplina", referencedColumnName="id_disciplina"),
-		inverseJoinColumns=@JoinColumn(name="id_aluno", referencedColumnName="id_aluno"))
+	@ManyToMany(fetch=FetchType.EAGER, mappedBy="disciplinas")
 	private List<Aluno> alunos;
 	
 	public Long getId() {
@@ -89,18 +85,12 @@ public class Disciplina {
 	}
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		Disciplina other;
+		if (obj instanceof Disciplina)
+			other = (Disciplina) obj;
+		else return false;
+		if (other.id.equals(this.id))
 			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Disciplina other = (Disciplina) obj;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
-		return true;
+		else return false;
 	}
 }

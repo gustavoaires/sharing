@@ -34,6 +34,8 @@
 			<div class="collapse navbar-collapse" id="navbar-ex-collapse">
 				<ul class="nav navbar-nav navbar-right">
 					<li><a href="/disciplina/listar" style="color: #fff">Disciplinas</a></li>
+					<li><a href="/aluno/listarMinhasDisciplinas" style="color: #fff"><i
+							class="fa fa-fw fa-pencil"></i>Minhas disciplinas</a></li>
 					<li><a href="/aluno/formAlterarPerfil" style="color: #fff">Alterar minhas informações</a></li>
 					<li class="active"><a href="/aluno/home">${aluno_logado.primeiroNome} ${aluno_logado.sobrenome}</a></li>
 					<li><a href="/login/logout" style="color: #fff">Sair</a></li>

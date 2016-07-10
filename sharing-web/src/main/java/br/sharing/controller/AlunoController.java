@@ -78,9 +78,6 @@ public class AlunoController {
 				alunoSessao.setIdInstituicao(aluno.getIdInstituicao());
 				aluno.setDisciplinas(null);
 			}
-//			Aluno a = alunoDao.findByLogin(aluno.getLogin());
-//			if (a == null)
-//				alunoSessao.setLogin(aluno.getLogin());
 			alunoSessao.setPrimeiroNome(aluno.getPrimeiroNome());
 			alunoSessao.setSobrenome(aluno.getSobrenome());
 			alunoSessao.setDescricao(aluno.getDescricao());
@@ -124,7 +121,8 @@ public class AlunoController {
 	
 	@RequestMapping("/listarMinhasDisciplinas")
 	public String listarMinhasDisciplinas(Model model, HttpSession sessao) {
-		Long idInst = ((Aluno)sessao.getAttribute(Atributo.ALUNO_LOGADO)).getIdInstituicao();
+		Aluno aluno = (Aluno)sessao.getAttribute(Atributo.ALUNO_LOGADO);
+		Long idInst = aluno.getIdInstituicao();
 		List<Disciplina> disciplinas = disciplinaController.getDisciplinasPorInstituicao(idInst);
 		model.addAttribute(Atributo.DISCIPLINAS, disciplinas);
 		return "/aluno/minhas_disciplinas";
@@ -136,14 +134,16 @@ public class AlunoController {
 	 * @param sessao
 	 * @param resposta
 	 */
-	@RequestMapping("/selecionarMinhaDisciplina")
-	public void selecionarMinhaDisciplina(Long id, HttpSession sessao, HttpServletResponse resposta) {
+	@RequestMapping("/adicionarMinhaDisciplina")
+	public void adicionarMinhaDisciplina(Long id, HttpSession sessao, HttpServletResponse resposta) {
 		Disciplina disc = disciplinaController.getDisciplinaPorId(id);
 		Aluno a = ((Aluno)sessao.getAttribute(Atributo.ALUNO_LOGADO));
-		if (!a.getDisciplinas().contains(disc))
+		if (!a.temDisciplina(disc))
 			a.addDisciplina(disc);
 		else
 			a.removeDisciplina(disc);
+		for (Disciplina d : a.getDisciplinas())
+			alunoDao.removerRepeticao(d.getId(), a.getLogin());
 		alunoDao.save(a);
 		resposta.setStatus(200);
 	}
@@ -200,6 +200,9 @@ public class AlunoController {
 			List<Atendimento> confirmados = 
 					atendimentoController.getPedidosAtendimentoPorStatus(login, "confirmado");
 			model.addAttribute(Atributo.ATENDIMENTOS_CONFIRMADOS, confirmados);
+			List<Atendimento> avaliados = 
+					atendimentoController.getPedidosAtendimentoPorStatus(login, "avaliado");
+			model.addAttribute(Atributo.ATENDIMENTOS_AVALIADOS, avaliados);
 			List<Atendimento> negados =
 					atendimentoController.getPedidosAtendimentoPorStatus(login, "negado");
 			model.addAttribute(Atributo.ATENDIMENTOS_NEGADOS, negados);
