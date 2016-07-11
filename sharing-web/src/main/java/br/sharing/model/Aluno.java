@@ -155,4 +155,14 @@ public class Aluno {
 				return true;
 		return false;
 	}
+	@Override
+	public boolean equals(Object obj) {
+		Aluno other;
+		if (obj instanceof Aluno)
+			other = (Aluno)obj;
+		else return false;
+		if (other.getLogin().equals(this.login))
+			return true;
+		else return false;
+	}
 }

@@ -130,7 +130,7 @@ public class AtendimentoController {
 						+ "[" + at.getId() + "]");
 		} catch(Exception e) {
 			e.printStackTrace();
-			model.addAttribute(Atributo.ERRO, Mensagem.ERRO);
+			model.addAttribute(Atributo.MENSAGEM, Mensagem.ERRO);
 		}
 		return "/mensagem";
 	}
@@ -142,27 +142,28 @@ public class AtendimentoController {
 	 * @param model
 	 * @return para a pagina de feedback
 	 */
-	@RequestMapping("/verMeusPedidosAtendimentos")
-	public String verMeusPedidosAtendimentos(String status, HttpSession sessao, Model model) {
+	@RequestMapping("/verMeusPedidosAtendimentosFeitos")
+	public String verMeusPedidosAtendimentosFeitos(String status, HttpSession sessao, Model model) {
 		try {
 			Aluno al = (Aluno)sessao.getAttribute(Atributo.ALUNO_LOGADO);
-			List<Atendimento> atendimentos = atendimentoDao.findByLoginAndStatus(al.getLogin(), status);
+			List<Atendimento> atendimentos = atendimentoDao.findByLoginAndStatusFeitos(al.getLogin(), status);
 			model.addAttribute(Atributo.MEUS_PEDIDOS_ATENDIMENTOS, atendimentos);
 			return "/atendimento/" + status;
 		} catch(Exception e) {
-			model.addAttribute(Atributo.ERRO, Mensagem.ERRO);
+			model.addAttribute(Atributo.MENSAGEM, Mensagem.ERRO);
 			return "/mensagem";
 		}
 	}
 	
-	@RequestMapping("/listar")
-	public String listar(Model model) {
+	@RequestMapping("/verMeusPedidosAtendimentosRecebidos")
+	public String verMeusPedidosAtendimentosRecebidos(String status, HttpSession sessao, Model model) {
 		try {
-			List<Atendimento> atendimentos = atendimentoDao.findAll();
-			model.addAttribute(Atributo.ATENDIMENTOS, atendimentos);
-			return "/atendimento/listar";
+			Aluno al = (Aluno)sessao.getAttribute(Atributo.ALUNO_LOGADO);
+			List<Atendimento> atendimentos = atendimentoDao.findByLoginAndStatusRecebidos(al.getLogin(), status);
+			model.addAttribute(Atributo.MEUS_PEDIDOS_ATENDIMENTOS, atendimentos);
+			return "/atendimento/" + status;
 		} catch(Exception e) {
-			model.addAttribute(Atributo.MENSAGEM, Mensagem.N_LISTAR);
+			model.addAttribute(Atributo.MENSAGEM, Mensagem.ERRO);
 			return "/mensagem";
 		}
 	}
@@ -178,8 +179,8 @@ public class AtendimentoController {
 		return "/mensagem";
 	}
 	
-	public List<Atendimento> getPedidosAtendimentoPorStatus(String login, String status) {
-		List<Atendimento> atendimentos = atendimentoDao.findByLoginAndStatus(login, status);
+	public List<Atendimento> getPedidosAtendimentoRecebidosPorStatus(String login, String status) {
+		List<Atendimento> atendimentos = atendimentoDao.findByLoginAndStatusRecebidos(login, status);
 		return atendimentos; 
-	}
+	}	
 }

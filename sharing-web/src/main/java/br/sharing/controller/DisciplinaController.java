@@ -61,9 +61,10 @@ public class DisciplinaController {
 	}
 	
 	@RequestMapping("/verDisciplina")
-	public String verDisciplina(Long id, Model model) {
+	public String verDisciplina(Long id, Model model, HttpSession sessao) {
 		List<Aluno> alunos = verDisciplina.getAlunosDisciplina(id);
 		Disciplina disciplina = disciplinaDao.findOne(id);
+		alunos.remove((Aluno)sessao.getAttribute(Atributo.ALUNO_LOGADO));
 		if (!alunos.isEmpty()) {
 			for (Aluno a : alunos)
 				a.setMedia(verDisciplina.getMediaAluno(id, a.getLogin()));

@@ -60,7 +60,7 @@
 				<div class="col-md-12">
 					<div class="list-group">
 						<c:forEach items="${disciplinas}" var="d">
-							<a href="#" onclick="adicionarDisciplina(${d.id})"
+							<a href="" onclick="adicionarDisciplina(${d.id})"
 								class="list-group-item ${aluno_logado.temDisciplina(d) ? 'active' : ''}">
 								${d.nome}</a>
 						</c:forEach>
