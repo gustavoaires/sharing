@@ -12,11 +12,14 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import br.sharing.dao.IAlunoDAO;
 import br.sharing.dao.IAtendimentoDAO;
+import br.sharing.dao.IDisciplinaDAO;
 import br.sharing.message_atribute.Atributo;
 import br.sharing.message_atribute.Mensagem;
 import br.sharing.model.Aluno;
 import br.sharing.model.Atendimento;
+import br.sharing.model.Disciplina;
 
 @Transactional
 @Controller
@@ -24,30 +27,40 @@ import br.sharing.model.Atendimento;
 public class AtendimentoController {
 
 	private IAtendimentoDAO atendimentoDao;
+	private IAlunoDAO alunoDao;
+	private IDisciplinaDAO disciplinaDao;
 
 	@Autowired
-	public AtendimentoController(IAtendimentoDAO atendimentoDao) {
+	public AtendimentoController(IAtendimentoDAO atendimentoDao, IAlunoDAO alunoDao,
+			IDisciplinaDAO disciplinaDao) {
 		this.atendimentoDao = atendimentoDao;
+		this.alunoDao = alunoDao;
+		this.disciplinaDao = disciplinaDao;
 	}
 	
 	@RequestMapping("/cadastrarSolicitacao")
 	public String cadastrarSolicitacao(String idAjudante, 
 			@DateTimeFormat(pattern="dd/MM/yyyy") Date dia, 
-			@DateTimeFormat(pattern="HH:mm") Date hora, 
+			@DateTimeFormat(pattern="HH:mm") Date hora, Long idDisciplina, 
 			String local, Model model, HttpSession sessao) {
 		try {
-			Atendimento a = new Atendimento();
-			a.setIdAjudante(idAjudante);
-			a.setPediuAjuda((Aluno)sessao.getAttribute(Atributo.ALUNO_LOGADO));
-			a.setDataAtendimento(dia);
-			a.setHoraAtendimento(hora);
-			a.setLocalDeEncontro(local);
-			atendimentoDao.save(a);
-			model.addAttribute(Atributo.MENSAGEM, Mensagem.INSERIDO);
+			Atendimento at = new Atendimento();
+			Aluno al = alunoDao.findOne(idAjudante);
+			Disciplina d = disciplinaDao.findOne(idDisciplina);
+			at.setIdAjudante(al.getLogin());
+			at.setAjudante(al);
+			at.setDisciplina(d);
+			at.setIdPediuAjuda(((Aluno)sessao.getAttribute(Atributo.ALUNO_LOGADO)).getLogin());
+			at.setPediuAjuda((Aluno)sessao.getAttribute(Atributo.ALUNO_LOGADO));
+			at.setDataAtendimento(dia);
+			at.setHoraAtendimento(hora);
+			at.setLocalDeEncontro(local);
+			atendimentoDao.save(at);
+			model.addAttribute(Atributo.MENSAGEM, Mensagem.PEDIDO_ATENDIMENTO_SUCESSO);
 		} catch(Exception e) {
 			model.addAttribute(Atributo.MENSAGEM, Mensagem.N_INSERIDO);
 		}
-		return "/mensagem";
+		return "/aluno/home";
 	}
 	
 	@RequestMapping("/confirmarAtendimento")
@@ -120,23 +133,25 @@ public class AtendimentoController {
 		try {
 			Aluno al = (Aluno)sessao.getAttribute(Atributo.ALUNO_LOGADO);
 			Atendimento at = atendimentoDao.findOne(id);
-			if (al.getLogin().equals(at.getIdPediuAjuda()) && at.getStatus().equals("confirmado")) {
+			Date agora = new Date();
+			if (al.getLogin().equals(at.getIdPediuAjuda()) && at.getStatus().equals("confirmado")
+					&& agora.after(at.getDataAtendimento())) {
 				at.setNota(nota);
 				at.setStatus("avaliado");
 				atendimentoDao.save(at);
-				model.addAttribute(Atributo.ATENDIMENTO_AVALIADO, Mensagem.ATENDIMENTO_AVALIADO);
-			} else
+				return "redirect:/aluno/verMeusPedidosAtendimentosFeitos";
+			} 
+			else
 				throw new Exception("Usuário inválido [" + al.getLogin() + "] tentou avaliar atendimento "
 						+ "[" + at.getId() + "]");
 		} catch(Exception e) {
 			e.printStackTrace();
-			model.addAttribute(Atributo.MENSAGEM, Mensagem.ERRO);
-		}
-		return "/mensagem";
+			model.addAttribute(Atributo.MENSAGEM, Mensagem.ERRO_AVALIAR_ATENDIMENTO);
+			return "/aluno/home";
+		}		
 	}
 
 	/**
-	 * 
 	 * @param status para filtrar os atendimentos, devera ser definido nas paginas
 	 * @param sessao
 	 * @param model
@@ -147,7 +162,9 @@ public class AtendimentoController {
 		try {
 			Aluno al = (Aluno)sessao.getAttribute(Atributo.ALUNO_LOGADO);
 			List<Atendimento> atendimentos = atendimentoDao.findByLoginAndStatusFeitos(al.getLogin(), status);
-			model.addAttribute(Atributo.MEUS_PEDIDOS_ATENDIMENTOS, atendimentos);
+			model.addAttribute(Atributo.PEDIDOS_ATENDIMENTO, atendimentos);
+			model.addAttribute(Atributo.MENSAGEM, Mensagem.ATENDIMENTOS_FEITOS_STATUS);
+			model.addAttribute(Atributo.STATUS, status);
 			return "/atendimento/" + status;
 		} catch(Exception e) {
 			model.addAttribute(Atributo.MENSAGEM, Mensagem.ERRO);
@@ -160,7 +177,9 @@ public class AtendimentoController {
 		try {
 			Aluno al = (Aluno)sessao.getAttribute(Atributo.ALUNO_LOGADO);
 			List<Atendimento> atendimentos = atendimentoDao.findByLoginAndStatusRecebidos(al.getLogin(), status);
-			model.addAttribute(Atributo.MEUS_PEDIDOS_ATENDIMENTOS, atendimentos);
+			model.addAttribute(Atributo.PEDIDOS_ATENDIMENTO, atendimentos);
+			model.addAttribute(Atributo.MENSAGEM, Mensagem.ATENDIMENTOS_RECEBIDOS_STATUS);
+			model.addAttribute(Atributo.STATUS, status);
 			return "/atendimento/" + status;
 		} catch(Exception e) {
 			model.addAttribute(Atributo.MENSAGEM, Mensagem.ERRO);

@@ -101,13 +101,15 @@
 							<button id="btnGroupDrop1" type="button"
 								class="btn btn-primary dropdown-toggle" data-toggle="dropdown"
 								aria-haspopup="true" aria-expanded="false">Pedidos que eu fiz</button>
-							<div class="dropdown-menu" aria-labelledby="btnGroupDrop2">
+							<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
 								<a class="dropdown-item" 
 									href="/atendimento/verMeusPedidosAtendimentosFeitos?status=aberto">Abertos</a> <br/>
 								<a class="dropdown-item" 
 									href="/atendimento/verMeusPedidosAtendimentosFeitos?status=negado">Negados</a> <br/>
 								<a class="dropdown-item" 
 									href="/atendimento/verMeusPedidosAtendimentosFeitos?status=confirmado">Confirmados</a> <br/>
+								<a class="dropdown-item" 
+									href="/atendimento/verMeusPedidosAtendimentosFeitos?status=avaliado">Avaliados</a> <br/>
 							</div>
 						</div>
 						<div class="col-md-offset-4 btn-group" role="group">
@@ -121,6 +123,8 @@
 									href="/atendimento/verMeusPedidosAtendimentosRecebidos?status=negado">Negados</a> <br/>
 								<a class="dropdown-item" 
 									href="/atendimento/verMeusPedidosAtendimentosRecebidos?status=confirmado">Confirmados</a> <br/>
+								<a class="dropdown-item" 
+									href="/atendimento/verMeusPedidosAtendimentosFeitos?status=avaliado">Avaliados</a> <br/>
 							</div>
 						</div>
 					</div>

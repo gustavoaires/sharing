@@ -1,7 +1,6 @@
 package br.sharing.service;
 
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -30,7 +29,7 @@ public class SmtpMailSenderService {
 	public void configurarEEnviarEmails() {
 		List<Atendimento> atendimentos = atendimentoDAO.findByStatus("confirmado");
 		if (!atendimentos.isEmpty()) {
-			for (Atendimento a : atendimentos) {	
+			for (Atendimento a : atendimentos) {
 				if (ehAmanha(a.getDataAtendimento())) {
 					String emailPediuAjuda = a.getPediuAjuda().getEmail();
 					String emailAjudante = a.getAjudante().getEmail();
@@ -41,12 +40,12 @@ public class SmtpMailSenderService {
 					try {
 						// Mensagem para quem pediu atendimento
 						conteudo = conteudo(a.getDataAtendimento(), a.getHoraAtendimento(),
-								ajudante, a.getLocalDeEncontro(), a.getDisciplina().getNome());
+								a.getLocalDeEncontro(), ajudante, a.getDisciplina().getNome());
 						this.enviar(emailPediuAjuda, ASSUNTO, conteudo);
 						
 						// Mensagem para quem vai dar atendimento
 						conteudo = conteudo(a.getDataAtendimento(), a.getHoraAtendimento(),
-								pediuAjuda, a.getLocalDeEncontro(), a.getDisciplina().getNome());
+								a.getLocalDeEncontro(), pediuAjuda, a.getDisciplina().getNome());
 						this.enviar(emailAjudante, ASSUNTO, conteudo);
 					} catch (MessagingException e) {
 						e.printStackTrace();
@@ -68,13 +67,12 @@ public class SmtpMailSenderService {
 		javaMailSender.send(mensagem);
 	}
 	
-	@SuppressWarnings("static-access")
+	@SuppressWarnings({ "deprecation" })
 	public boolean ehAmanha(Date atendimento) {
 		if (atendimento != null) {
-			Calendar agora = Calendar.getInstance();
-			Calendar data = Calendar.getInstance();
-			data.setTime(atendimento);
-			if (agora.YEAR == data.YEAR && agora.DAY_OF_YEAR+1 == data.DAY_OF_YEAR)
+			Date agora = new Date();
+			if (agora.getYear() == atendimento.getYear() && agora.getMonth() == atendimento.getMonth()
+					&& agora.getDate()+1 == atendimento.getDate())
 				return true;
 		}
 		return false;

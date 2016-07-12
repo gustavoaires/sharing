@@ -32,7 +32,7 @@
 			</div>
 			<div class="collapse navbar-collapse" id="navbar-ex-collapse">
 				<ul class="nav navbar-nav navbar-right">
-					<li class="active"><a href="#">Disciplinas</a></li>
+					<li class="active"><a href="#">Minhas disciplinas</a></li>
 					<li><a href="/aluno/formAlterarPerfil" style="color: #fff">Alterar
 							minhas informações</a></li>
 					<li><a href="/aluno/home" style="color: #fff">${aluno_logado.primeiroNome}
@@ -60,7 +60,8 @@
 				<div class="col-md-12">
 					<div class="list-group">
 						<c:forEach items="${disciplinas}" var="d">
-							<a href="" onclick="adicionarDisciplina(${d.id})"
+							<!-- onclick="adicionarDisciplina(${d.id})"-->
+							<a href="/aluno/adicionarMinhaDisciplina?id=${d.id}"
 								class="list-group-item ${aluno_logado.temDisciplina(d) ? 'active' : ''}">
 								${d.nome}</a>
 						</c:forEach>

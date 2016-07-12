@@ -23,16 +23,16 @@ public class Atendimento {
 	private String status;
 	private String localDeEncontro;
 	
-	public Atendimento() {
-		this.nota = 0;
-		this.status = "aberto";
-	}
-	
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private Date dataAtendimento; 
 	
 	@DateTimeFormat(pattern = "HH:mm")
 	private Date horaAtendimento;
+	
+	public Atendimento() {
+		this.nota = 0;
+		this.status = "aberto";
+	}
 	
 	/*
 	 * Relacionando disciplina do atendimento

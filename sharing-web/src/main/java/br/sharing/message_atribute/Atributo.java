@@ -25,4 +25,5 @@ public class Atributo {
 	public static final String ATENDIMENTOS_NEGADOS = "atendimentos_negados";
 	public static final String ATENDIMENTOS_AVALIADOS = "atendimentos_avaliados";
 	public static final String DISCIPLINAS_ALUNO = "disciplinas_aluno";
+	public static final String STATUS = "status";
 }

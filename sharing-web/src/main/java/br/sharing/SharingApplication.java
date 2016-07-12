@@ -39,6 +39,7 @@ public class SharingApplication extends SpringBootServletInitializer implements 
 				Date atual;
 				Date meiaNoite = new Date(1, 1, 1, 0, 0, 0);
 				while (true) {
+					
 					atual = new Date();
 					if (atual.getHours() == meiaNoite.getHours() 
 							&& atual.getMinutes() == meiaNoite.getMinutes()) {

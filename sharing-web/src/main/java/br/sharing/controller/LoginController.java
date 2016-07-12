@@ -30,13 +30,12 @@ public class LoginController {
 				return "redirect:/aluno/home";
 			}
 		}
-		return "redirect:/";
+		return "redirect:/index";
 	}
 	
 	@RequestMapping("/logout")
 	public String logout(HttpSession session){
-		alunoDao.save((Aluno)session.getAttribute(Atributo.ALUNO_LOGADO));
 		session.invalidate(); 
-		return "redirect:/";
+		return "redirect:/index";
 	}
 }

@@ -48,38 +48,38 @@
 						<div class="form-group">
 							<label class="control-label" for="primeiroNome">Nome</label>
 							<input class="form-control" id="primeiroNome" name="primeiroNome"
-								placeholder="Nome" type="text" value="${aluno.primeiroNome}"/>
+								placeholder="Nome" type="text" value="${aluno.primeiroNome}" required/>
 						</div>
 						<div class="form-group">
 							<label class="control-label" for="sobrenome">Sobrenome</label>
 							<input class="form-control" id="sobrenome" name="sobrenome"
-								placeholder="Sobrenome" type="text" value="${aluno.sobrenome}"/>
+								placeholder="Sobrenome" type="text" value="${aluno.sobrenome}" required/>
 						</div>
 						<div class="form-group">
 							<label class="control-label" for="descricao">Descricao</label>
 							<input class="form-control" id="descricao" name="descricao" value="${aluno.descricao}"
 								placeholder="Escreva um pouco sobre voce. Suas areas de interesse, disciplinas que gosta, etc."
-								type="text"/>
+								type="text" required/>
 						</div>
 						<div class="form-group">
 							<label class="control-label" for="horariosDisponiveis">Horarios disponiveis</label>
 							<input class="form-control" id="horariosDisponiveis" name="horariosDisponiveis"
-								placeholder="Segunda: 10h-12h, Terca:13h-14" value="${aluno.horariosDisponiveis}" type="text"/>
+								placeholder="Segunda: 10h-12h, Terca:13h-14" value="${aluno.horariosDisponiveis}" type="text" required/>
 						</div>
 						<div class="form-group">
 							<label class="control-label" for="login">Login</label>
 							<input class="form-control" id="login" name="login" value="${aluno.login}"
-								placeholder="exemplomeulogin" type="text"/>
+								placeholder="exemplomeulogin" type="text" required/>
 						</div>
 						<div class="form-group">
 							<label class="control-label" for="email">Email</label>
 							<input class="form-control" id="email" name="email" value="${aluno.email}"
-								placeholder="meuemail@mail.com" type="text"/>
+								placeholder="meuemail@mail.com" type="email" required/>
 						</div>
 						<div class="form-group">
 							<label class="control-label" for="senha">Senha</label>
 							<input class="form-control" id="senha" name="senha"
-								placeholder="senha" type="password"/>
+								placeholder="senha" type="password" required/>
 						</div>
 						<div class="form-group">
 							<label class="control-label" for="instituicao">Instituicao</label>

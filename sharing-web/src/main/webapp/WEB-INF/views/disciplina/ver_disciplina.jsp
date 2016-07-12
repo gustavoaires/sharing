@@ -63,11 +63,12 @@
 					<div class="col-md-4">
 						<h3 class="text-left">${a.primeiroNome} ${a.sobrenome}</h3>
 						<h4>Ver perfil: <a href="/aluno/perfil?login=${a.login}">${a.login}</a> </h4>
-						<p class="text-left">${a.horariosDisponiveis}</p>
+						<p class="text-left">Horários disponíveis: ${a.horariosDisponiveis}</p>
 						<div class="progress">
-							<div class="progress-bar" role="progressbar" style="width: ${a.media}%">${a.media}% recomendado</div>
+							<div class="progress-bar" role="progressbar" style="width: ${a.media * 10}%">${a.media * 10}% recomendado</div>
 						</div>
-						<a class="btn btn-success" href="/aluno/pedirAjuda?idAjudante=${a.login}">Pedir ajuda</a>
+						<a class="btn btn-success" href="/aluno/pedirAjuda?idAjudante=${a.login}&idDisciplina=${disciplina.id}">
+							Pedir ajuda</a>
 					</div>
 				</div>
 			</c:forEach>

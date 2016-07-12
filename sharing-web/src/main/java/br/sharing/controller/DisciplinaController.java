@@ -1,5 +1,6 @@
 package br.sharing.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -65,6 +66,7 @@ public class DisciplinaController {
 		List<Aluno> alunos = verDisciplina.getAlunosDisciplina(id);
 		Disciplina disciplina = disciplinaDao.findOne(id);
 		alunos.remove((Aluno)sessao.getAttribute(Atributo.ALUNO_LOGADO));
+		alunos = removeAlunosRepetidos(alunos);
 		if (!alunos.isEmpty()) {
 			for (Aluno a : alunos)
 				a.setMedia(verDisciplina.getMediaAluno(id, a.getLogin()));
@@ -119,5 +121,13 @@ public class DisciplinaController {
 	
 	public List<Disciplina> getDisciplinaPorAluno(String login) {
 		return disciplinaDao.findByLogin(login);
+	}
+	
+	private List<Aluno> removeAlunosRepetidos(List<Aluno> alunos) {
+		List<Aluno> novaLista = new ArrayList<Aluno>();
+		for (Aluno a : alunos)
+			if (!novaLista.contains(a))
+				novaLista.add(a);
+		return novaLista;
 	}
 }

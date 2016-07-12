@@ -93,8 +93,9 @@ public class AlunoController {
 	}
 	
 	@RequestMapping("/pedirAjuda")
-	public String pedirAjuda(String idAjudante, Model model) {
+	public String pedirAjuda(String idAjudante, Long idDisciplina, Model model) {
 		Aluno aluno = alunoDao.findOne(idAjudante);
+		model.addAttribute(Atributo.DISCIPLINA, disciplinaController.getDisciplinaPorId(idDisciplina));
 		model.addAttribute(Atributo.ALUNO, aluno);
 		return "/aluno/pedir_ajuda";
 	}

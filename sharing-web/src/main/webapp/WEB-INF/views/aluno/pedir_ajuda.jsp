@@ -1,7 +1,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 <meta charset="utf-8">
@@ -16,6 +16,15 @@
 <link
 	href="http://pingendo.github.io/pingendo-bootstrap/themes/default/bootstrap.css"
 	rel="stylesheet" type="text/css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js">
+	
+</script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+<script src="datepicker.js"></script>
+<link rel="stylesheet"
+	href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
 </head>
 <body>
 	<div class="navbar navbar-default navbar-static-top"
@@ -28,7 +37,7 @@
 						class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="/aluno/home" style="color:#fff"><span>Sharing</span></a>
+				<a class="navbar-brand" href="/aluno/home" style="color: #fff"><span>Sharing</span></a>
 			</div>
 			<div class="collapse navbar-collapse" id="navbar-ex-collapse">
 				<ul class="nav navbar-nav navbar-right">
@@ -47,27 +56,32 @@
 				<div class="col-md-3">
 					<img src="img/steve.jpeg" class="img-responsive">
 				</div>
-				<div class="col-md-9">
+				<div class="col-md-6">
 					<h3>${aluno.primeiroNome}${aluno.sobrenome}</h3>
 					<h3 contenteditable="true">Selecione uma data e horário e
 						envie a solicitação</h3>
-					<div class="form-group">
-						<div class="col-sm-1">
-							<label for="localAtendimento" class="control-label">Local</label>
+					<form role="form" action="/atendimento/cadastrarSolicitacao" method="post">
+						<div class="form-group">
+							<label class="control-label" for="exampleInputEmail1">Local
+							</label> <input class="form-control" id="local" name="local"
+								placeholder="local" type="text" required>
 						</div>
-						<div class="col-sm-8">
-							<input type="text" class="form-control" id="local"
-								name="localAtendimento" placeholder="Ex: Sala de atendimento" />
+						<div class="form-group">
+							<label class="control-label">Data do encontro</label> <input
+								name="dia" class="form-control" required="required"
+								pattern="[0-9]{2}\/[0-9]{2}\/[0-9]{4}$" type="date"
+								placeholder="dd/mm/aaaa" required>
 						</div>
-					</div>
-
-					<div class="form-group">
-						<div class="col-sm-offset-1 col-sm-11">
-							<button type="submit" class="btn btn-success"
-								href="/atendimento/cadastrarSolicitacao?idAjudante=${aluno.login}">Enviar
-								solicitação</button>
+						<div class="form-group">
+							<label class="control-label">Horario do encontro</label> <input
+								name="hora" class="form-control" required="required"
+								pattern="[0-9]{2}\:[0-9]{2}$" type="date"
+								placeholder="hh:mm" required>
 						</div>
-					</div>
+						<input type="hidden" value="${aluno.login}" name="idAjudante"/>
+						<input type="hidden" value="${disciplina.id}" name="idDisciplina">
+						<button type="submit" class="btn btn-success">Pedir ajuda</button>
+					</form>
 				</div>
 			</div>
 		</div>
