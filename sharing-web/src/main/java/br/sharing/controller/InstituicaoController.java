@@ -30,8 +30,9 @@ public class InstituicaoController {
 	}
 	
 	@RequestMapping("/inserir")
-	public String inserir(Model model) {
+	public String inserir(Instituicao instituicao, Model model) {
 		try {
+			instituicaoDao.save(instituicao);
 			model.addAttribute("mensagem", Mensagem.INSERIDO);
 		} catch(Exception e) {
 			model.addAttribute("mensagem", Mensagem.N_INSERIDO);

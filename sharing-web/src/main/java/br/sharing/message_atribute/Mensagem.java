@@ -24,11 +24,12 @@ public class Mensagem {
 	public static final String ATENDIMENTO_AVALIADO = "Atendimento avaliado com sucesso!";
 	public static final String N_PEDIDOS_ATENDIMENTOS = "Não há pedidos de atendimento em aberto";
 	public static final String FOTO_ALTERADA = "Foto alterada com sucesso!";
-	public static final String FOTO_N_ALTERADA = "Foto não foi alterada.";
+	public static final String FOTO_N_ALTERADA = "Foto não foi alterada. Selecione uma imagem no formato png com menos de 1048576 bytes.";
 	public static final String LISTAR_DISCIPLINAS = "Selecione a disciplina que em que você precisa de ajuda.";
 	public static final String ATENDIMENTOS_FEITOS_STATUS = "Seus pedidos de atendimentos feitos com status ";
 	public static final String ATENDIMENTOS_RECEBIDOS_STATUS = "Seus pedidos de atendimentos recebidos com status ";
 	public static final String ERRO_AVALIAR_ATENDIMENTO = "Não foi possível avaliar o atendimento.";
 	public static final String PEDIDO_ATENDIMENTO_SUCESSO = "Pedido de atendimento feito com sucesso";
+	public static final String TAMANHO_N_SUPORTADO = "O tamanho desta imagem não é suportado";
 	
 }

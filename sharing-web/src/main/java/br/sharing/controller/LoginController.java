@@ -38,4 +38,9 @@ public class LoginController {
 		session.invalidate(); 
 		return "redirect:/index";
 	}
+	
+	@RequestMapping("/loginAdm")
+	public String loginAdm(String login, String senha) {
+		return "redirect:/adm/home";
+	}
 }

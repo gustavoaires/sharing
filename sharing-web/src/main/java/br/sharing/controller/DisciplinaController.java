@@ -38,13 +38,14 @@ public class DisciplinaController {
 	}
 	
 	@RequestMapping("/inserir")
-	public String inserir(Model model) {
+	public String inserir(Disciplina disciplina, Model model) {
 		try {
+			disciplinaDao.save(disciplina);
 			model.addAttribute(Atributo.MENSAGEM, Mensagem.INSERIDO);
 		} catch(Exception e) {
 			model.addAttribute(Atributo.MENSAGEM, Mensagem.N_INSERIDO);
 		}
-		return "/mensagem";
+		return "redirect:/adm/home";
 	}
 
 	@RequestMapping("/listar")

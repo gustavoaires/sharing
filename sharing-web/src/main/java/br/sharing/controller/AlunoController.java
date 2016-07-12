@@ -181,12 +181,15 @@ public class AlunoController {
 	}
 	
 	@RequestMapping("/alterarFoto")
-	public String alterarFoto(@RequestParam(value="image", required=false) MultipartFile image,
+	public String alterarFoto(@RequestParam(value="imagem", required=false) MultipartFile image,
 			HttpSession sessao, Model model) {
 		try {
+			if (!image.getContentType().equals("image/png")) throw new Exception(); 
 			if (image != null && !image.isEmpty()) {
 				Aluno a = (Aluno)sessao.getAttribute(Atributo.ALUNO_LOGADO);
+				System.out.println();
 				String pathName = servletContext.getRealPath("/") + "images/" + a.getLogin() + ".png";
+				System.out.println(pathName);
 				FileUtil.saveImage(pathName, image);
 				model.addAttribute(Atributo.MENSAGEM, Mensagem.FOTO_ALTERADA);
 			}

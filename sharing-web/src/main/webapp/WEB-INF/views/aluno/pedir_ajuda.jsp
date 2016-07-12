@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script type="text/javascript"
 	src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -54,7 +54,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-md-3">
-					<img src="img/steve.jpeg" class="img-responsive">
+					<img src="../images/${aluno.login}.png" class="img-responsive">
 				</div>
 				<div class="col-md-6">
 					<h3>${aluno.primeiroNome}${aluno.sobrenome}</h3>

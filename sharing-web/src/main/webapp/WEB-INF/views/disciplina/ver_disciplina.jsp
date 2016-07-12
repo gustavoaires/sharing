@@ -5,7 +5,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script type="text/javascript"
 	src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -33,11 +33,10 @@
 			</div>
 			<div class="collapse navbar-collapse" id="navbar-ex-collapse">
 				<ul class="nav navbar-nav navbar-right">
+					<li><a href="/aluno/home" style="color: #fff">Home</a></li>
 					<li class="active"><a href="#"><i class="fa fa-fw fa-book"></i>${disciplina.nome}</a></li>
 					<li><a href="/aluno/home" style="color: #fff">
 						${aluno_logado.primeiroNome} ${aluno_logado.sobrenome}</a></li>
-					<li><a href="#" style="color: #fff"><i
-							class="fa fa-fw fa-cogs"></i>Meu Perfil</a></li>
 					<li><a href="/login/logout" style="color: #fff">Sair</a></li>
 				</ul>
 			</div>
@@ -58,7 +57,7 @@
 			<c:forEach var="a" items="${alunos}">
 				<div class="row col-md-offset-3">
 					<div class="col-md-2">
-						<img src="img/steve.jpeg" class="img-circle img-responsive">
+						<img src="../images/${a.login}.png" class="img-circle img-responsive">
 					</div>
 					<div class="col-md-4">
 						<h3 class="text-left">${a.primeiroNome} ${a.sobrenome}</h3>
